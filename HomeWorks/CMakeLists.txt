@@ -1,1 +1,1 @@
-include_directories(Week_1)
+add_subdirectory(Week_1)
