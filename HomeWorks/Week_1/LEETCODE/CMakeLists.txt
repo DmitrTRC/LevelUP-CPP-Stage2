@@ -16,6 +16,7 @@ message(STATUS "LeetCode1 directory: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 add_library(leet_lib STATIC
             src/isPalindrome.cpp
             src/BuddyStrings.cpp
+            src/SingleNumberIII.cpp
             )
 
 add_executable(main src/main.cpp)

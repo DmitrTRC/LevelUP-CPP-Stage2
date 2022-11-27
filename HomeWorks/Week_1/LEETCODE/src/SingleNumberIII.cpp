@@ -2,7 +2,6 @@
 // Created by Dmitry Morozov on 27/11/22.
 //
 
-#include <iostream>
 #include <vector>
 
 using namespace std;
