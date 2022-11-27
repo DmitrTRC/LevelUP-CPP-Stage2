@@ -25,7 +25,9 @@ public:
 
         int first = -1;
         int second = -1;
+
         for (int i = 0; i < s.length(); i++) {
+
             if (s[i] != goal[i]) {
                 if (first == -1) {
                     first = i;
@@ -36,6 +38,7 @@ public:
                 }
             }
         }
+
         return (second != -1) && (s[first] == goal[second]) && (s[second] == goal[first]);
     }
 };

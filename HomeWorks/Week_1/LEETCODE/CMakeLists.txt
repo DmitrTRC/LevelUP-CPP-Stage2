@@ -17,6 +17,7 @@ add_library(leet_lib STATIC
             src/isPalindrome.cpp
             src/BuddyStrings.cpp
             src/SingleNumberIII.cpp
+            src/SingleNumberII.cpp
             )
 
 add_executable(main src/main.cpp)
