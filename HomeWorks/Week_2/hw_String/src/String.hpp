@@ -5,13 +5,14 @@
 #ifndef LEVELUP_CPP_MAIN_STRING_HPP
 #define LEVELUP_CPP_MAIN_STRING_HPP
 
+#include <iostream>
 
 class String {
 
 public:
     String();
 
-    String(const char *str);
+    explicit String(const char *str);
 
     String(const String &str);
 
@@ -19,29 +20,40 @@ public:
 
     ~String();
 
+
+    // Capacity
+    [[nodiscard]] inline size_t length() const { return _length; }
+
+
+    [[nodiscard]] inline bool empty() const { return _length == 0; }
+
+    bool operator==(const String &str);
+
+    template<typename T>
+    String &operator=(T &&str);
+
     String &operator=(const String &str);
 
     String &operator=(const char *str);
 
-    String &operator+=(const String &str);
+    template<typename T>
+    String &operator+=(T &&str);
 
-    String &operator+=(const char *str);
+    template<typename T>
+    String &operator+(T &&str);
 
-    String operator+(const String &str);
+    template<typename T>
+    bool operator!=(T &&str);
 
-    String operator+(const char *str);
-
-    bool operator==(const String &str);
-
-    bool operator==(const char *str);
-
-    bool operator!=(const String &str);
-
-    bool operator!=(const char *str);
 
     char &operator[](int index);
 
-    int length();
+    void append(const String &str);
+
+    void append(const char *str);
+
+
+    friend std::ostream &operator<<(std::ostream &os, const String &str);
 
     void clear();
 
@@ -49,11 +61,15 @@ public:
 
 private:
     char *_str;
-    int _length;
+    size_t _length;
 
 };
 
+inline std::ostream &operator<<(std::ostream &os, const String &str) {
 
+    os << str._str;
+    return os;
+}
 
 
 #endif //LEVELUP_CPP_MAIN_STRING_HPP
