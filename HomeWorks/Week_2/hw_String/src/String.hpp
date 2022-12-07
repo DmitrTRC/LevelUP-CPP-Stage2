@@ -37,13 +37,13 @@ public:
     String &operator=(const char *str);
 
     template<typename T>
-    String &operator+=(T &&str);
+    String &operator+=(T &str);
 
     template<typename T>
-    String &operator+(T &&str);
+    String &operator+(T &str);
 
     template<typename T>
-    bool operator!=(T &&str);
+    bool operator  <=>(T &str);
 
 
     char &operator[](int index);

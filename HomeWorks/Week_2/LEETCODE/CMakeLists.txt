@@ -21,7 +21,7 @@ add_executable(
         ${CMAKE_PROJECT_NAME}
         src/main.cpp
         src/Pangram.cpp
-        src/ReverseStr.cpp src/RunningSum.cpp)
+        src/ReverseStr.cpp src/RunningSum.cpp src/ArrayPartition.cpp)
 #
 #target_link_libraries(main leet_lib)
 #

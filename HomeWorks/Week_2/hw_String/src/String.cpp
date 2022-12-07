@@ -61,44 +61,6 @@ String &String::operator=(T &&str) {
     return *this;
 }
 
-template<typename T>
-String &String::operator+(T &&str) {
-
-    auto *newStr = new String();
-
-    newStr->_length = _length + strlen(str);
-
-    newStr->_str = new char[newStr->_length + 1];
-
-    strcpy(newStr->_str, _str);
-
-    strcat(newStr->_str, str);
-
-    return *newStr;
-}
-
-template<typename T>
-String &String::operator+=(T &&str) {
-
-    auto *newStr = new String();
-
-    newStr->_length = _length + strlen(str);
-
-    newStr->_str = new char[newStr->_length + 1];
-
-    strcpy(newStr->_str, _str);
-
-    strcat(newStr->_str, str);
-
-    return *newStr;
-}
-
-
-template<typename T>
-bool String::operator!=(T &&str) {
-
-    return strcmp(_str, str) != 0;
-}
 
 char &String::operator[](int index) {
 
@@ -188,6 +150,39 @@ void String::append(const char *str) {
     strcat(newStr->_str, str);
 
     *this = *newStr;
+
+}
+
+template<typename T>
+bool String::operator<=>(T &str) {
+
+    return strcmp(_str, str.c_str()) < 0;
+
+}
+
+template<typename T>
+String &String::operator+=(T &str) {
+
+    append(str);
+
+    return *this;
+}
+
+
+template<typename T>
+String &String::operator+(T &str) {
+
+    auto *newStr = new String();
+
+    newStr->_length = _length + str.length();
+
+    newStr->_str = new char[newStr->_length + 1];
+
+    strcpy(newStr->_str, _str);
+
+    strcat(newStr->_str, str.c_str());
+
+    return *newStr;
 
 }
 
