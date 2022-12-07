@@ -191,10 +191,6 @@ void String::append(const char *str) {
 
 }
 
-char *String::begin() const {
-
-    return _str;
-}
 
 
 

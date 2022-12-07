@@ -17,7 +17,11 @@ message(STATUS "LeetCode1 directory: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 #
 #            )
 #
-#add_executable(main src/main.cpp)
+add_executable(
+        ${CMAKE_PROJECT_NAME}
+        src/main.cpp
+        src/Pangram.cpp
+)
 #
 #target_link_libraries(main leet_lib)
 #
