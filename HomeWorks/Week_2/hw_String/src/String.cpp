@@ -115,11 +115,6 @@ String &String::operator=(const char *str) {
 }
 
 
-bool String::operator==(const String &str) {
-
-    return strcmp(_str, str._str) == 0;
-
-}
 
 void String::append(const String &str) {
 
@@ -153,12 +148,7 @@ void String::append(const char *str) {
 
 }
 
-template<typename T>
-bool String::operator<=>(T &str) {
 
-    return strcmp(_str, str.c_str()) < 0;
-
-}
 
 template<typename T>
 String &String::operator+=(T &str) {

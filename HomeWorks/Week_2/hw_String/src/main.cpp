@@ -16,5 +16,19 @@ int main() {
     s1.append(" World");
     std::cout << s1 << std::endl;
 
+    String s3 = std::move(s1);
+    std::cout << s3 << std::endl;
+
+    String s4(s2);
+
+
+    std::cout << "s1 length: " << s1.length() << std::endl;
+
+    std::cout << "s3 < s4: " << (s3 < s4) << std::endl;
+
+    std::cout << "s3 > s4: " << (s3 > s4) << std::endl;
+
+    std::cout << "s3 == s4: " << (s3 == s4) << std::endl;
+
     return 0;
 }

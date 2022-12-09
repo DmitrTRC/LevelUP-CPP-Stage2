@@ -24,10 +24,8 @@ public:
     // Capacity
     [[nodiscard]] inline size_t length() const { return _length; }
 
-
     [[nodiscard]] inline bool empty() const { return _length == 0; }
 
-    bool operator==(const String &str);
 
     template<typename T>
     String &operator=(T &&str);
@@ -42,8 +40,7 @@ public:
     template<typename T>
     String &operator+(T &str);
 
-    template<typename T>
-    bool operator  <=>(T &str);
+    auto operator<=>(const String &) const = default;
 
 
     char &operator[](int index);
