@@ -37,8 +37,13 @@ public:
     template<typename T>
     String &operator+=(T &str);
 
-    template<typename T>
-    String &operator+(T &str);
+    template<typename T, typename Y>
+    friend String operator+(T &lhs_str, Y &rhs_str) {
+
+        String result(lhs_str);
+        result += rhs_str;
+        return result;
+    }
 
     auto operator<=>(const String &) const = default;
 
@@ -50,7 +55,11 @@ public:
     void append(const char *str);
 
 
-    friend std::ostream &operator<<(std::ostream &os, const String &str);
+    friend std::ostream &operator<<(std::ostream &os, const String &str) {
+
+        os << str._str;
+        return os;
+    };
 
     void clear();
 
@@ -61,12 +70,6 @@ private:
     size_t _length;
 
 };
-
-inline std::ostream &operator<<(std::ostream &os, const String &str) {
-
-    os << str._str;
-    return os;
-}
 
 
 #endif //LEVELUP_CPP_MAIN_STRING_HPP

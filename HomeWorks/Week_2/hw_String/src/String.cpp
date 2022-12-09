@@ -115,39 +115,36 @@ String &String::operator=(const char *str) {
 }
 
 
-
 void String::append(const String &str) {
 
-    auto *newStr = new String();
+    _length += str._length;
 
-    newStr->_length = _length + str._length;
+    char *temp = new char[_length + 1];
 
-    newStr->_str = new char[newStr->_length + 1];
+    strcpy(temp, _str);
+    strcat(temp, str._str);
 
-    strcpy(newStr->_str, _str);
+    delete[] _str;
 
-    strcat(newStr->_str, str._str);
+    _str = temp;
 
-    *this = *newStr;
 
 }
 
 void String::append(const char *str) {
 
-    auto *newStr = new String();
+    _length += strlen(str);
 
-    newStr->_length = _length + strlen(str);
+    char *temp = new char[_length + 1];
 
-    newStr->_str = new char[newStr->_length + 1];
+    strcpy(temp, _str);
+    strcat(temp, str);
 
-    strcpy(newStr->_str, _str);
+    delete[] _str;
 
-    strcat(newStr->_str, str);
-
-    *this = *newStr;
+    _str = temp;
 
 }
-
 
 
 template<typename T>
@@ -159,22 +156,6 @@ String &String::operator+=(T &str) {
 }
 
 
-template<typename T>
-String &String::operator+(T &str) {
-
-    auto *newStr = new String();
-
-    newStr->_length = _length + str.length();
-
-    newStr->_str = new char[newStr->_length + 1];
-
-    strcpy(newStr->_str, _str);
-
-    strcat(newStr->_str, str.c_str());
-
-    return *newStr;
-
-}
 
 
 
