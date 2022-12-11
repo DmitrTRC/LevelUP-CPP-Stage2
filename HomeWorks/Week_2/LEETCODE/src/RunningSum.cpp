@@ -16,7 +16,7 @@ public:
             runningNums.push_back(tmp);
         }
 
-        return runningNums; //Right way just return runningNums. Ok
+        return runningNums;
 
     }
 };

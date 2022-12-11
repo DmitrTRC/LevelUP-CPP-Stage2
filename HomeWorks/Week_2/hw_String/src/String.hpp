@@ -10,28 +10,76 @@
 class String {
 
 public:
+
+    /**
+     * Default constructor
+     */
     String();
 
+    /**
+     * Constructor with char*
+     * @param str
+     */
     explicit String(const char *str);
 
+    /**
+     * Copy constructor
+     * @param str
+     */
     String(const String &str);
 
+    /**
+     * Move constructor
+     * @param str
+     */
     String(String &&str) noexcept;
 
+    /**
+     * Destructor
+     */
     ~String();
 
 
-    // Capacity
+    /**
+     * Returns the length of the string
+     * @return
+     */
     [[nodiscard]] inline size_t length() const { return _length; }
 
+    /**
+     * Returns the char* of the string
+     * @return
+     */
+    [[nodiscard]] const char *c_str();
+
+    /**
+     * Appends the string to the end of the current string
+     * @param str
+     * @return
+     */
     [[nodiscard]] inline bool empty() const { return _length == 0; }
 
 
+    /**
+     * Appends the string to the end of the current string
+     * @param str
+     * @return
+     */
     template<typename T>
     String &operator=(T &&str);
 
+    /**
+     * Appends the string to the end of the current string
+     * @param str
+     * @return
+     */
     String &operator=(const String &str);
 
+    /**
+     * Appends the string to the end of the current string
+     * @param str
+     * @return
+     */
     String &operator=(const char *str);
 
     template<typename T>
@@ -63,7 +111,6 @@ public:
 
     void clear();
 
-    const char *c_str();
 
 private:
     char *_str;
