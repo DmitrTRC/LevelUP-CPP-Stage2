@@ -52,34 +52,18 @@ public:
      */
     [[nodiscard]] const char *c_str();
 
-    /**
-     * Appends the string to the end of the current string
-     * @param str
-     * @return
-     */
+
     [[nodiscard]] inline bool empty() const { return _length == 0; }
 
 
-    /**
-     * Appends the string to the end of the current string
-     * @param str
-     * @return
-     */
+
     template<typename T>
     String &operator=(T &&str);
 
-    /**
-     * Appends the string to the end of the current string
-     * @param str
-     * @return
-     */
+
     String &operator=(const String &str);
 
-    /**
-     * Appends the string to the end of the current string
-     * @param str
-     * @return
-     */
+
     String &operator=(const char *str);
 
     template<typename T>
