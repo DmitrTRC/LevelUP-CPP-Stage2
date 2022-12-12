@@ -16,5 +16,6 @@ message(STATUS "Words Output directory: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 add_executable(
         Words
         src/main.cpp
+        src/Helper.cpp
 )
 
