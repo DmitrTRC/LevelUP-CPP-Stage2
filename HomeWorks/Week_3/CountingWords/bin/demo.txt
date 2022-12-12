@@ -1,0 +1,5 @@
+This is a test file for basic rules of parsing and formatting. It is not intended to be a complete test of all possible cases.
+The separator test  example: One. Two. Three
+Dmitry, Anna, Sergey.
+Test for ( brackets in sentences  )
+Test for [ brackets in sentences  ]

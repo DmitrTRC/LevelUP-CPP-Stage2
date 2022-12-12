@@ -10,7 +10,9 @@ public:
     vector<int> runningSum(vector<int> &nums) {
 
         vector<int> runningNums;
+
         int tmp = 0;
+
         for (int num : nums) {
             tmp += num;
             runningNums.push_back(tmp);
