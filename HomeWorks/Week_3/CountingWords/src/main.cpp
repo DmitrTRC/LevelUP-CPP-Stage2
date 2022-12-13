@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    std::string file_name = argv[1];
+    std::string file_name = argv[1]; // get file name from command line
 
     std::wstring word_to_search;
 
