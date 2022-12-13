@@ -32,10 +32,7 @@ int main(int argc, char *argv[]) {
     std::locale::global(std::locale("ru_RU.UTF-8"));
     std::wcout.imbue(std::locale("ru_RU.UTF-8"));
 
-    if (argc > 2) {
-        word_to_search = to_wstring(argv[2]);
-        std::wcout << "Searching for word: " << word_to_search << std::endl;
-    }
+
     std::wifstream file(argv[1]);
 
     if (!file.is_open()) {
@@ -58,17 +55,25 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if (!word_to_search.empty()) {
+
         std::wcout << "Total words found: " << words.size() << std::endl;
-        std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
-    } else {
-        printMap(words);
+
+        if (argc > 2) {
+
+            for (size_t i = 2; i < argc; ++i) {
+                word_to_search = to_wstring(argv[i]);
+                std::wcout << "Searching for word: " << word_to_search << std::endl;
+                std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
+            }
+
+        } else {
+            printMap(words);
+        }
+
+        //Get execution time in ms
+        auto end = std::chrono::steady_clock::now();
+        std::chrono::duration<double, std::milli> elapsed = end - start;
+        std::cout << "Execution time: " << elapsed.count() << " ms" << std::endl;
+
+        return 0;
     }
-
-    //Get execution time in ms
-    auto end = std::chrono::steady_clock::now();
-    std::chrono::duration<double, std::milli> elapsed = end - start;
-    std::cout << "Execution time: " << elapsed.count() << " ms" << std::endl;
-
-    return 0;
-}
