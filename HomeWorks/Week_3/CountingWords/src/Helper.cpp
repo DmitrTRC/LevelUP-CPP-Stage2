@@ -9,22 +9,26 @@
 #include <codecvt>
 #include <iostream>
 #include <vector>
+#include <map>
 
 
 std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
 
+
     {
         std::wstring result;
 
-        for (std::wstring::const_iterator it = s.begin(); it != s.end(); ++it) {
-            result += std::use_facet<std::ctype<wchar_t> >(loc).tolower(*it);
-        }
+
+        std::transform(s.begin(), s.end(), std::back_inserter(result), [&loc](wchar_t c) {
+            return std::tolower(c, loc);
+        });
 
         return result;
     }
 }
 
-void printMap(std::unordered_map < std::wstring, int > &dict) {
+
+void printMap(std::unordered_map<std::wstring, int> &dict) {
 
     //Sort dictionary by value in descending order( Debug purpose only )
     std::vector<std::pair<std::wstring, int>> vec;
