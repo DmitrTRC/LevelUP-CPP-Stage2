@@ -9,7 +9,7 @@
 #include <iostream>
 #include <unordered_map>
 
-std::wstring toLowerRus(std::wstring &);
+std::wstring toLowerRus(std::wstring &, const std::locale &);
 
 void printMap(std::unordered_map<std::wstring, int> &);
 void trim_punctuation(std::wstring &);

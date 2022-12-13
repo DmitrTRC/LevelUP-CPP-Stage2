@@ -46,11 +46,12 @@ int main(int argc, char *argv[]) {
     std::wstring word;
     std::unordered_map<std::wstring, int> words;
 
+    std::locale loc = std::locale("ru_RU.UTF-8");
 
     while (file >> word) {
         trim_punctuation(word);
 
-        auto lWord = toLowerRus(word);
+        auto lWord = toLowerRus(word, loc);
 
         if (!word.empty()) {
             words[lWord]++;
