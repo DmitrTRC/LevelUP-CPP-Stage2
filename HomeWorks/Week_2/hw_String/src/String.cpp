@@ -4,6 +4,8 @@
 
 #include "String.hpp"
 
+#include <cstring>
+
 String::String() : _length(0) {
 
     _str = new char[1];
@@ -12,7 +14,7 @@ String::String() : _length(0) {
 
 String::String(const char *str) {
 
-    _length = strlen(str);
+    _length = std::strlen(str);
 
     _str = new char[_length + 1];
 
@@ -23,7 +25,7 @@ String::String(const String &str) : _length(str._length) {
 
     _str = new char[_length + 1];
 
-    strcpy(_str, str._str);
+    std::strcpy(_str, str._str);
 }
 
 String::String(String &&str) noexcept: _length(str._length), _str(str._str) {
@@ -56,7 +58,7 @@ String &String::operator=(T &&str) {
 
     _str = new char[_length + 1];
 
-    strcpy(_str, str.c_str());
+    std::strcpy(_str, str.c_str());
 
     return *this;
 }
@@ -87,11 +89,11 @@ String &String::operator=(const String &str) {
 
     delete[] _str;
 
-    _length = strlen(str._str);
+    _length = std::strlen(str._str);
 
     _str = new char[_length + 1];
 
-    strcpy(_str, str._str);
+    std::strcpy(_str, str._str);
 
     return *this;
 }
@@ -105,11 +107,11 @@ String &String::operator=(const char *str) {
 
     delete[] _str;
 
-    _length = strlen(str);
+    _length = std::strlen(str);
 
     _str = new char[_length + 1];
 
-    strcpy(_str, str);
+    std::strcpy(_str, str);
 
     return *this;
 }
@@ -121,8 +123,8 @@ void String::append(const String &str) {
 
     char *temp = new char[_length + 1];
 
-    strcpy(temp, _str);
-    strcat(temp, str._str);
+    std::strcpy(temp, _str);
+    std::strcat(temp, str._str);
 
     delete[] _str;
 
@@ -133,12 +135,12 @@ void String::append(const String &str) {
 
 void String::append(const char *str) {
 
-    _length += strlen(str);
+    _length += std::strlen(str);
 
     char *temp = new char[_length + 1];
 
-    strcpy(temp, _str);
-    strcat(temp, str);
+    std::strcpy(temp, _str);
+    std::strcat(temp, str);
 
     delete[] _str;
 
