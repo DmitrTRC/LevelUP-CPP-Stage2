@@ -22,7 +22,7 @@ std::wstring toLowerRus(std::wstring &s) {
     }
 }
 
-void printMap(std::map<std::wstring, int> &dict) {
+void printMap(std::unordered_map<std::wstring, int> &dict) {
 
     //Sort dictionary by value
     std::vector<std::pair<std::wstring, int>> vec;

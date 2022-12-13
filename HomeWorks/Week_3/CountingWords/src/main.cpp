@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <chrono>
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <fstream>
 #include <locale>
 
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
     }
 
     std::wstring word;
-    std::map<std::wstring, int> words;
+    std::unordered_map<std::wstring, int> words;
 
 
     while (file >> word) {
@@ -58,6 +58,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (!word_to_search.empty()) {
+        std::wcout << "Total words found: " << words.size() << std::endl;
         std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
     } else {
         printMap(words);
