@@ -3,44 +3,39 @@
 //
 #include "Helper.hpp"
 
+
 #include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <map>
 #include <fstream>
-#include <cwctype>
 #include <locale>
 
 
-void printMap(std::map<std::wstring, int> &map) {
-    for (auto &item : map) {
-        std::wcout << item.first << L" - " << item.second << std::endl;
-    }
-}
-
-
-
-void trim_punctuation(std::wstring &str) {
-
-    str.erase(std::remove_if(str.begin(), str.end(), ispunct), str.end());
-}
-
-/**
- * @brief Program reads a given file and counts word occurrences in it
- * @param argc
- * @param argv
- * @return 0 if success
- */
 int main(int argc, char *argv[]) {
 
-    if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " <file_name>" << std::endl;
+    auto start = std::chrono::steady_clock::now();
+
+
+    if (argc < 2) {
+        std::cerr << "Usage: " << argv[0] << " <file_name> <word_to_search>" << std::endl;
         return 1;
     }
+
+    std::string file_name = argv[1];
+
+    std::wstring word_to_search;
+
+
 
     //Set locale to Russian
     std::locale::global(std::locale("ru_RU.UTF-8"));
     std::wcout.imbue(std::locale("ru_RU.UTF-8"));
 
+    if (argc > 2) {
+        word_to_search = to_wstring(argv[2]);
+        std::wcout << "Searching for word: " << word_to_search << std::endl;
+    }
     std::wifstream file(argv[1]);
 
     if (!file.is_open()) {
@@ -50,7 +45,7 @@ int main(int argc, char *argv[]) {
 
     std::wstring word;
     std::map<std::wstring, int> words;
-   // printASCII();
+
 
     while (file >> word) {
         trim_punctuation(word);
@@ -62,7 +57,16 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    printMap(words);
+    if (!word_to_search.empty()) {
+        std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
+    } else {
+        printMap(words);
+    }
+
+    //Get execution time in ms
+    auto end = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::milli> elapsed = end - start;
+    std::cout << "Execution time: " << elapsed.count() << " ms" << std::endl;
 
     return 0;
 }
