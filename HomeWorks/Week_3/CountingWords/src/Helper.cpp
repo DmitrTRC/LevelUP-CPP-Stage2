@@ -5,26 +5,28 @@
 #include "Helper.hpp"
 
 #include <algorithm>
-#include <iostream>
 #include <cctype>
-#include <vector>
 #include <codecvt>
+#include <iostream>
+#include <vector>
+
 
 std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
 
     {
         std::wstring result;
-//        std::locale loc = std::locale("ru_RU.UTF-8");
+
         for (std::wstring::const_iterator it = s.begin(); it != s.end(); ++it) {
             result += std::use_facet<std::ctype<wchar_t> >(loc).tolower(*it);
         }
+
         return result;
     }
 }
 
-void printMap(std::unordered_map<std::wstring, int> &dict) {
+void printMap(std::unordered_map < std::wstring, int > &dict) {
 
-    //Sort dictionary by value
+    //Sort dictionary by value in descending order( Debug purpose only )
     std::vector<std::pair<std::wstring, int>> vec;
     std::copy(dict.begin(), dict.end(), std::back_inserter<std::vector<std::pair<std::wstring, int>>>(vec));
     std::sort(vec.begin(), vec.end(), [](const std::pair<std::wstring, int> &a, const std::pair<std::wstring, int> &b) {

@@ -6,10 +6,10 @@
 
 #include <algorithm>
 #include <chrono>
-#include <iostream>
-#include <unordered_map>
 #include <fstream>
+#include <iostream>
 #include <locale>
+#include <unordered_map>
 
 
 int main(int argc, char *argv[]) {
@@ -56,24 +56,24 @@ int main(int argc, char *argv[]) {
     }
 
 
-        std::wcout << "Total words found: " << words.size() << std::endl;
+    std::wcout << "Total words found: " << words.size() << std::endl;
 
-        if (argc > 2) {
+    if (argc > 2) {
 
-            for (size_t i = 2; i < argc; ++i) {
-                word_to_search = to_wstring(argv[i]);
-                std::wcout << "Searching for word: " << word_to_search << std::endl;
-                std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
-            }
-
-        } else {
-            printMap(words);
+        for (size_t i = 2; i < argc; ++i) {
+            word_to_search = to_wstring(argv[i]);
+            std::wcout << "Searching for word: " << word_to_search << std::endl;
+            std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
         }
 
-        //Get execution time in ms
-        auto end = std::chrono::steady_clock::now();
-        std::chrono::duration<double, std::milli> elapsed = end - start;
-        std::cout << "Execution time: " << elapsed.count() << " ms" << std::endl;
-
-        return 0;
+    } else {
+        printMap(words);
     }
+
+    //Get execution time in ms
+    auto end = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::milli> elapsed = end - start;
+    std::cout << "Execution time: " << elapsed.count() << " ms" << std::endl;
+
+    return 0;
+}
