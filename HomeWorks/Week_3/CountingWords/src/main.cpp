@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
     std::wcout.imbue(std::locale("ru_RU.UTF-8"));
 
 
+    std::wstring text = to_wstring(argv[3]); // get word to search from command line
     std::wifstream file(argv[1]);
 
     if (!file.is_open()) {

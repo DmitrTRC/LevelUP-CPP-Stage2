@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <cctype>
 #include <codecvt>
+#include <execution>
 #include <iostream>
 #include <vector>
 #include <map>
@@ -19,7 +20,7 @@ std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
         std::wstring result;
 
 
-        std::transform(s.begin(), s.end(), std::back_inserter(result), [&loc](wchar_t c) {
+        std::transform(s.begin(), s.end(), std::back_inserter(result),   [&loc](wchar_t c) {
             return std::tolower(c, loc);
         });
 

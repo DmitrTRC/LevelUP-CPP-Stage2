@@ -17,5 +17,5 @@ add_executable(
         Words
         src/main.cpp
         src/Helper.cpp
-)
 
+)
