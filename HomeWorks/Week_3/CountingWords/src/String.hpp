@@ -81,6 +81,12 @@ public:
 
     void append(const wchar_t *str);
 
+
+    //implement insert()
+    void insert(int index, const wString &str);
+
+    void push_back(wchar_t c);
+
     friend std::wostream &operator<<(std::wostream &wos, const wString &str) {
 
         wos << str.str_;
@@ -119,6 +125,16 @@ public:
             return tmp;
         }
 
+        auto operator-(const Iterator &rhs) const {
+
+            return ptr_ - rhs.ptr_;
+        }
+
+        auto operator-(const wchar_t *str) const {
+
+            return ptr_ - str;
+        }
+
         wchar_t &operator*() const { return *ptr_; }
 
         wchar_t *operator->() const { return ptr_; }
@@ -126,6 +142,10 @@ public:
         bool operator==(const Iterator &rhs) const { return ptr_ == rhs.ptr_; }
 
         bool operator!=(const Iterator &rhs) const { return ptr_ != rhs.ptr_; }
+
+        bool operator<(const Iterator &rhs) const { return ptr_ < rhs.ptr_; }
+
+        bool operator>(const Iterator &rhs) const { return ptr_ > rhs.ptr_; }
 
     private:
         wchar_t *ptr_;
@@ -135,6 +155,9 @@ public:
 
     // Return iterator to end of string
     Iterator end() { return Iterator(str_ + length_); }
+
+    // Erase()
+    void erase(wString::Iterator &, const wchar_t *);
 
 private:
     wchar_t *str_;

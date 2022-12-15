@@ -3,22 +3,27 @@
 //
 
 #include "Helper.hpp"
+#include "String.hpp"
+
 
 #include <algorithm>
 #include <cctype>
 #include <codecvt>
-#include <execution>
 #include <iostream>
 #include <vector>
 
 
-std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
+wString toLowerRus(wString &s, const std::locale &loc) {
 
-    std::wstring result;
+    wString result;
 
-    std::transform(s.begin(), s.end(), std::back_inserter(result), [&loc](wchar_t c) {
-        return std::tolower(c, loc);
-    });
+//    std::transform(s.begin(), s.end(), std::back_inserter(result), [&loc](wchar_t c) {
+//        return std::tolower(c, loc);
+//    });
+
+    for (auto c: s) {
+        result.push_back(std::tolower(c, loc));
+    }
 
     return result;
 }
@@ -27,15 +32,15 @@ std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
 void printMap(std::unordered_map<std::wstring, int> &dict) {
 
     //Sort dictionary by value in descending order( Debug purpose only )
-    std::vector<std::pair<std::wstring, int>> vec;
-    std::copy(dict.begin(), dict.end(), std::back_inserter<std::vector<std::pair<std::wstring, int>>>(vec));
-    std::sort(vec.begin(), vec.end(), [](const std::pair<std::wstring, int> &a, const std::pair<std::wstring, int> &b) {
-        return a.second < b.second;
-    });
-
-    for (auto &pair: vec) {
-        std::wcout << pair.first << " : " << pair.second << std::endl;
-    }
+//    std::vector<std::pair<std::wstring, int>> vec;
+//    std::copy(dict.begin(), dict.end(), std::back_inserter<std::vector<std::pair<std::wstring, int>>>(vec));
+//    std::sort(vec.begin(), vec.end(), [](const std::pair<std::wstring, int> &a, const std::pair<std::wstring, int> &b) {
+//        return a.second < b.second;
+//    });
+//
+//    for (auto &pair: vec) {
+//        std::wcout << pair.first << " : " << pair.second << std::endl;
+//    }
 }
 
 /**
@@ -43,9 +48,13 @@ void printMap(std::unordered_map<std::wstring, int> &dict) {
  *
  * @param str The string to be trimmed.
  */
-void trim_punctuation(std::wstring &str) {
+void trim_punctuation(wString &str) {
 
-    str.erase(std::remove_if(str.begin(), str.end(), ispunct), str.end());
+    str.erase(std::remove_if(str.begin(), str.end(), [](wchar_t c) {
+        return std::ispunct(c);
+    }), str.end());
+
+
 }
 
 
@@ -54,7 +63,7 @@ void trim_punctuation(std::wstring &str) {
  *
  * @param str The string to strip punctuation from.
  */
-void strip_punctuation_left_right(std::wstring &str) {
+void strip_punctuation_left_right(wString &str) {
 
     str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) {
         return !std::ispunct(ch);

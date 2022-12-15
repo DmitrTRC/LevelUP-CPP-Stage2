@@ -149,6 +149,48 @@ void wString::append(const wchar_t *str) {
 
 }
 
+void wString::push_back(wchar_t c) {
+
+    length_++;
+
+    wchar_t *temp = new wchar_t[length_ + 1];
+
+    std::wcscpy(temp, str_);
+    temp[length_ - 1] = c;
+    temp[length_] = '\0';
+
+    delete[] str_;
+
+    str_ = temp;
+
+}
+
+void wString::erase(wString::Iterator &start, const wchar_t *end) {
+
+    if (start == end) {
+
+        return;
+    }
+
+    if (start > end) {
+
+        std::swap(start, end);
+    }
+
+    size_t new_length = length_ - (end - start);
+
+    wchar_t *temp = new wchar_t[new_length + 1];
+
+    std::wcsncpy(temp, str_, start - str_);
+    std::wcscpy(temp + (start - str_), (const wchar_t *) end);
+
+    delete[] str_;
+
+    str_ = temp;
+    length_ = new_length;
+
+}
+
 
 template<typename T>
 wString &wString::operator+=(T &str) {
@@ -157,14 +199,5 @@ wString &wString::operator+=(T &str) {
 
     return *this;
 }
-
-
-
-
-
-
-
-
-
 
 
