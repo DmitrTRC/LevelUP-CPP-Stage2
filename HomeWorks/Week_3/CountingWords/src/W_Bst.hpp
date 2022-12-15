@@ -7,7 +7,7 @@
 
 #include <string>
 
-// Class Binary Search Tree for counting the words in the text
+
 class wBST {
 public:
 
@@ -15,7 +15,11 @@ public:
 
     ~wBST();
 
-    void AddWord(std::wstring &word);
+    void Add(std::wstring &word);
+
+    int Search(std::wstring &word);
+
+    [[nodiscard]] size_t size() const;
 
 private:
     struct Node {
@@ -24,8 +28,19 @@ private:
         Node *left;
         Node *right;
 
-        Node(std::wstring &word) : word(word), count(1), left(nullptr), right(nullptr) {}
+        explicit Node(std::wstring &word) : word(word), count(1), left(nullptr), right(nullptr) {}
+
     };
+
+    Node *root;
+
+    void AddWord(Node *node, std::wstring &word);
+
+    int SearchWord(Node *node, std::wstring &word);
+
+    void DeleteTree(Node *node);
+
+    size_t size_;
 
 };
 

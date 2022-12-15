@@ -2,14 +2,14 @@
 // Created by Dmitry Morozov on 20/9/22.
 //
 #include "Helper.hpp"
-
+#include "W_Bst.hpp"
 
 #include <algorithm>
 #include <chrono>
 #include <fstream>
 #include <iostream>
 #include <locale>
-#include <unordered_map>
+// #include <unordered_map>
 
 
 int main(int argc, char *argv[]) {
@@ -26,14 +26,10 @@ int main(int argc, char *argv[]) {
 
     std::wstring word_to_search;
 
-
-
     //Set locale to Russian
     std::locale::global(std::locale("ru_RU.UTF-8"));
     std::wcout.imbue(std::locale("ru_RU.UTF-8"));
 
-
-    std::wstring text = to_wstring(argv[3]); // get word to search from command line
     std::wifstream file(argv[1]);
 
     if (!file.is_open()) {
@@ -42,7 +38,9 @@ int main(int argc, char *argv[]) {
     }
 
     std::wstring word;
-    std::unordered_map<std::wstring, int> words;
+
+    //std::unordered_map<std::wstring, int> words;
+    wBST words;
 
     std::locale loc = std::locale("ru_RU.UTF-8");
 
@@ -52,7 +50,8 @@ int main(int argc, char *argv[]) {
         auto lWord = toLowerRus(word, loc);
 
         if (!word.empty()) {
-            words[lWord]++;
+            //  words[lWord]++;
+            words.Add(lWord);
         }
     }
 
@@ -64,11 +63,13 @@ int main(int argc, char *argv[]) {
         for (size_t i = 2; i < argc; ++i) {
             word_to_search = to_wstring(argv[i]);
             std::wcout << "Searching for word: " << word_to_search << std::endl;
-            std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
+            //  std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
+            std::wcout << "Word " << word_to_search << " found " << words.Search(word_to_search) << " times"
+                       << std::endl;
         }
 
     } else {
-        printMap(words);
+        std::wcout << "No word to search for" << std::endl;
     }
 
     //Get execution time in ms

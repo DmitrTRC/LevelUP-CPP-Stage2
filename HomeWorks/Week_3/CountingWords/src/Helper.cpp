@@ -10,7 +10,7 @@
 #include <execution>
 #include <iostream>
 #include <vector>
-#include <map>
+
 
 
 std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
