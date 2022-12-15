@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <locale>
+#include <sstream>
 // #include <unordered_map>
 
 
@@ -39,12 +40,18 @@ int main(int argc, char *argv[]) {
 
     std::wstring word;
 
+    std::wstring data;
     //std::unordered_map<std::wstring, int> words;
     wBST words;
 
     std::locale loc = std::locale("ru_RU.UTF-8");
 
-    while (file >> word) {
+    getline(file, data, std::wstring::traits_type::to_char_type(
+            std::wstring::traits_type::eof()));
+
+    auto ss = std::wstringstream(data);
+
+    while (ss >> word) {
         trim_punctuation(word);
 
         auto lWord = toLowerRus(word, loc);

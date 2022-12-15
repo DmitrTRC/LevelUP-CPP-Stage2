@@ -43,9 +43,31 @@ void printMap(std::unordered_map<std::wstring, int> &dict) {
     }
 }
 
+/**
+ * It removes all punctuation from a string
+ *
+ * @param str The string to be trimmed.
+ */
 void trim_punctuation(std::wstring &str) {
 
     str.erase(std::remove_if(str.begin(), str.end(), ispunct), str.end());
+}
+
+
+/**
+ * It strips punctuation from the left and right of a string.
+ *
+ * @param str The string to strip punctuation from.
+ */
+void strip_punctuation_left_right(std::wstring &str) {
+
+    str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) {
+        return !std::ispunct(ch);
+    }));
+
+    str.erase(std::find_if(str.rbegin(), str.rend(), [](int ch) {
+        return !std::ispunct(ch);
+    }).base(), str.end());
 }
 
 
