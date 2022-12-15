@@ -17,4 +17,4 @@ add_executable(
         Words
         src/main.cpp
         src/Helper.cpp
-        src/W_Bst.cpp)
+        src/W_Bst.cpp src/String.cpp)

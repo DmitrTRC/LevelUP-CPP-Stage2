@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="Words" type="CMakeRunConfiguration" factoryName="Application"
+                   PROGRAM_PARAMS="Tom1.txt  нет да мать граф мы вы" REDIRECT_INPUT="false" ELEVATE="false"
+                   USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LevelUP_CPP" TARGET_NAME="Words"
+                   CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LevelUP_CPP" RUN_TARGET_NAME="Words">
+        <method v="2">
+            <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask"
+                    enabled="true"/>
+        </method>
+    </configuration>
+</component>

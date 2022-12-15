@@ -12,20 +12,15 @@
 #include <vector>
 
 
-
 std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
 
+    std::wstring result;
 
-    {
-        std::wstring result;
+    std::transform(s.begin(), s.end(), std::back_inserter(result), [&loc](wchar_t c) {
+        return std::tolower(c, loc);
+    });
 
-
-        std::transform(s.begin(), s.end(), std::back_inserter(result),   [&loc](wchar_t c) {
-            return std::tolower(c, loc);
-        });
-
-        return result;
-    }
+    return result;
 }
 
 

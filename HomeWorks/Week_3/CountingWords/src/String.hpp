@@ -7,37 +7,37 @@
 
 #include <iostream>
 
-class String {
+class wString {
 
 public:
 
     /**
      * Default constructor
      */
-    String();
+    wString();
 
     /**
      * Constructor with char*
      * @param str
      */
-    explicit String(const char *str);
+    explicit wString(const wchar_t *str);
 
     /**
      * Copy constructor
      * @param str
      */
-    String(const String &str);
+    wString(const wString &str);
 
     /**
      * Move constructor
      * @param str
      */
-    String(String &&str) noexcept;
+    wString(wString &&str) noexcept;
 
     /**
      * Destructor
      */
-    ~String();
+    ~wString();
 
 
     /**
@@ -50,38 +50,38 @@ public:
      * Returns the char* of the string
      * @return
      */
-    [[nodiscard]] const char *c_str();
+    [[nodiscard]] const wchar_t *c_str();
 
 
     [[nodiscard]] inline bool empty() const { return length_ == 0; }
 
     template<typename T>
-    String &operator=(T &&str);
+    wString &operator=(T &&str);
 
-    String &operator=(const String &str);
+    wString &operator=(const wString &str);
 
-    String &operator=(const char *str);
+    wString &operator=(const wchar_t *str);
 
     template<typename T>
-    String &operator+=(T &str);
+    wString &operator+=(T &str);
 
     template<typename T, typename Y>
-    friend String operator+(T &lhs_str, Y &rhs_str) {
+    friend wString operator+(T &lhs_str, Y &rhs_str) {
 
-        String result(lhs_str);
+        wString result(lhs_str);
         result += rhs_str;
         return result;
     }
 
-    auto operator<=>(const String &) const = default;
+    auto operator<=>(const wString &) const = default;
 
     char &operator[](int index);
 
-    void append(const String &str);
+    void append(const wString &str);
 
-    void append(const char *str);
+    void append(const wchar_t *str);
 
-    friend std::ostream &operator<<(std::ostream &os, const String &str) {
+    friend std::ostream &operator<<(std::ostream &os, const wString &str) {
 
         os << str.str_;
         return os;
@@ -91,7 +91,7 @@ public:
 
     class Iterator {
     public:
-        explicit Iterator(char *ptr) : ptr_(ptr) {}
+        explicit Iterator(wchar_t *ptr) : ptr_(ptr) {}
 
         Iterator &operator++() {
 
@@ -119,16 +119,16 @@ public:
             return tmp;
         }
 
-        char &operator*() const { return *ptr_; }
+        wchar_t &operator*() const { return *ptr_; }
 
-        char *operator->() const { return ptr_; }
+        wchar_t *operator->() const { return ptr_; }
 
         bool operator==(const Iterator &rhs) const { return ptr_ == rhs.ptr_; }
 
         bool operator!=(const Iterator &rhs) const { return ptr_ != rhs.ptr_; }
 
     private:
-        char *ptr_;
+        wchar_t *ptr_;
     };
 
     Iterator begin() { return Iterator(str_); }
@@ -137,7 +137,7 @@ public:
     Iterator end() { return Iterator(str_ + length_); }
 
 private:
-    char *str_;
+    wchar_t *str_;
     size_t length_;
 
 };

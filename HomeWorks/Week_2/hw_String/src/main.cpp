@@ -21,6 +21,10 @@ int main() {
 
     String s4(s2);
 
+    for (auto c: s3) {
+        std::cout << c << std::endl;
+        std::cout << "Ok" << std::endl;
+    }
 
     std::cout << "s1 length: " << s1.length() << std::endl;
 

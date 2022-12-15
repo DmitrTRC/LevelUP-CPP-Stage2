@@ -6,13 +6,13 @@
 
 #include <cstring>
 
-String::String() : length_(0) {
+wString::wString() : length_(0) {
 
-    str_ = new char[1];
+    str_ = new wchar_t[1];
     str_[0] = '\0';
 }
 
-String::String(const char *str) {
+wString::wString(const char *str) {
 
     length_ = std::strlen(str);
 
