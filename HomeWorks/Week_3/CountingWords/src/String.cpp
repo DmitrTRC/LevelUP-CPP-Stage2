@@ -4,7 +4,8 @@
 
 #include "String.hpp"
 
-#include <cstring>
+#include <cwctype>
+#include <cwchar>
 
 wString::wString() : length_(0) {
 
@@ -12,40 +13,40 @@ wString::wString() : length_(0) {
     str_[0] = '\0';
 }
 
-wString::wString(const char *str) {
+wString::wString(const wchar_t *str) {
 
-    length_ = std::strlen(str);
+    length_ = std::wcslen(str);
 
-    str_ = new char[length_ + 1];
+    str_ = new wchar_t[length_ + 1];
 
-    strcpy(str_, str);
+    wcscpy(str_, str);
 }
 
-String::String(const String &str) : length_(str.length_) {
+wString::wString(const wString &str) : length_(str.length_) {
 
-    str_ = new char[length_ + 1];
+    str_ = new wchar_t[length_ + 1];
 
-    std::strcpy(str_, str.str_);
+    std::wcscpy(str_, str.str_);
 }
 
-String::String(String &&str) noexcept: length_(str.length_), str_(str.str_) {
+wString::wString(wString &&str) noexcept: length_(str.length_), str_(str.str_) {
 
     str.length_ = 0;
     str.str_ = nullptr;
 }
 
-String::~String() {
+wString::~wString() {
 
     delete[] str_;
 }
 
-const char *String::c_str() {
+const wchar_t *wString::wc_str() {
 
     return str_;
 }
 
 template<typename T>
-String &String::operator=(T &&str) {
+wString &wString::operator=(T &&str) {
 
     if (this == &str) {
 
@@ -56,31 +57,31 @@ String &String::operator=(T &&str) {
 
     length_ = str.length();
 
-    str_ = new char[length_ + 1];
+    str_ = new wchar_t[length_ + 1];
 
-    std::strcpy(str_, str.c_str());
+    std::wcscpy(str_, str.wc_str());
 
     return *this;
 }
 
 
-char &String::operator[](int index) {
+wchar_t &wString::operator[](int index) {
 
     return str_[index];
 }
 
 
-void String::clear() {
+void wString::clear() {
 
     delete[] str_;
 
     length_ = 0;
-    str_ = new char[1];
+    str_ = new wchar_t[1];
     str_[0] = '\0';
 
 }
 
-String &String::operator=(const String &str) {
+wString &wString::operator=(const wString &str) {
 
     if (this == &str) {
 
@@ -89,16 +90,16 @@ String &String::operator=(const String &str) {
 
     delete[] str_;
 
-    length_ = std::strlen(str.str_);
+    length_ = std::wcslen(str.str_);
 
-    str_ = new char[length_ + 1];
+    str_ = new wchar_t[length_ + 1];
 
-    std::strcpy(str_, str.str_);
+    std::wcscpy(str_, str.str_);
 
     return *this;
 }
 
-String &String::operator=(const char *str) {
+wString &wString::operator=(const wchar_t *str) {
 
     if (this == static_cast<const void *>(str)) {
 
@@ -107,24 +108,24 @@ String &String::operator=(const char *str) {
 
     delete[] str_;
 
-    length_ = std::strlen(str);
+    length_ = std::wcslen(str);
 
-    str_ = new char[length_ + 1];
+    str_ = new wchar_t[length_ + 1];
 
-    std::strcpy(str_, str);
+    std::wcscpy(str_, str);
 
     return *this;
 }
 
 
-void String::append(const String &str) {
+void wString::append(const wString &str) {
 
     length_ += str.length_;
 
-    char *temp = new char[length_ + 1];
+    wchar_t *temp = new wchar_t[length_ + 1];
 
-    std::strcpy(temp, str_);
-    std::strcat(temp, str.str_);
+    std::wcscpy(temp, str_);
+    std::wcscat(temp, str.str_);
 
     delete[] str_;
 
@@ -133,14 +134,14 @@ void String::append(const String &str) {
 
 }
 
-void String::append(const char *str) {
+void wString::append(const wchar_t *str) {
 
-    length_ += std::strlen(str);
+    length_ += std::wcslen(str);
 
-    char *temp = new char[length_ + 1];
+    wchar_t *temp = new wchar_t[length_ + 1];
 
-    std::strcpy(temp, str_);
-    std::strcat(temp, str);
+    std::wcscpy(temp, str_);
+    std::wcscat(temp, str);
 
     delete[] str_;
 
@@ -150,7 +151,7 @@ void String::append(const char *str) {
 
 
 template<typename T>
-String &String::operator+=(T &str) {
+wString &wString::operator+=(T &str) {
 
     append(str);
 

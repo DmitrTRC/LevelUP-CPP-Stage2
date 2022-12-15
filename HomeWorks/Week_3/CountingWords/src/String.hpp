@@ -50,7 +50,7 @@ public:
      * Returns the char* of the string
      * @return
      */
-    [[nodiscard]] const wchar_t *c_str();
+    [[nodiscard]] const wchar_t *wc_str();
 
 
     [[nodiscard]] inline bool empty() const { return length_ == 0; }
@@ -75,16 +75,16 @@ public:
 
     auto operator<=>(const wString &) const = default;
 
-    char &operator[](int index);
+    wchar_t &operator[](int index);
 
     void append(const wString &str);
 
     void append(const wchar_t *str);
 
-    friend std::ostream &operator<<(std::ostream &os, const wString &str) {
+    friend std::wostream &operator<<(std::wostream &wos, const wString &str) {
 
-        os << str.str_;
-        return os;
+        wos << str.str_;
+        return wos;
     };
 
     void clear();
