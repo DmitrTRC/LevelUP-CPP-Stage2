@@ -4,7 +4,6 @@
 
 #include "String.hpp"
 
-#include <cwctype>
 #include <cwchar>
 
 wString::wString() : length_(0) {
@@ -65,7 +64,7 @@ wString &wString::operator=(T &&str) {
 }
 
 
-wchar_t &wString::operator[](int index) {
+wchar_t &wString::operator[](size_t index) {
 
     return str_[index];
 }
@@ -122,7 +121,7 @@ void wString::append(const wString &str) {
 
     length_ += str.length_;
 
-    wchar_t *temp = new wchar_t[length_ + 1];
+    auto *temp = new wchar_t[length_ + 1];
 
     std::wcscpy(temp, str_);
     std::wcscat(temp, str.str_);
@@ -138,7 +137,7 @@ void wString::append(const wchar_t *str) {
 
     length_ += std::wcslen(str);
 
-    wchar_t *temp = new wchar_t[length_ + 1];
+    auto *temp = new wchar_t[length_ + 1];
 
     std::wcscpy(temp, str_);
     std::wcscat(temp, str);
@@ -153,7 +152,7 @@ void wString::push_back(wchar_t c) {
 
     length_++;
 
-    wchar_t *temp = new wchar_t[length_ + 1];
+    auto *temp = new wchar_t[length_ + 1];
 
     std::wcscpy(temp, str_);
     temp[length_ - 1] = c;
@@ -165,29 +164,30 @@ void wString::push_back(wchar_t c) {
 
 }
 
-void wString::erase(wString::Iterator &start, const wchar_t *end) {
+void wString::erase(size_t index, size_t count) {
 
-    if (start == end) {
+    if (index >= length_) {
 
         return;
     }
 
-    if (start > end) {
+    if (index + count > length_) {
 
-        std::swap(start, end);
+        count = length_ - index;
     }
 
-    size_t new_length = length_ - (end - start);
+    length_ -= count;
 
-    wchar_t *temp = new wchar_t[new_length + 1];
+    auto *temp = new wchar_t[length_ + 1];
 
-    std::wcsncpy(temp, str_, start - str_);
-    std::wcscpy(temp + (start - str_), (const wchar_t *) end);
+    std::wcsncpy(temp, str_, index);
+    std::wcsncpy(temp + index, str_ + index + count, length_ - index);
+    temp[length_] = '\0';
 
     delete[] str_;
 
     str_ = temp;
-    length_ = new_length;
+
 
 }
 

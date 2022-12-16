@@ -46,10 +46,7 @@ public:
      */
     [[nodiscard]] inline size_t length() const { return length_; }
 
-    /**
-     * Returns the char* of the string
-     * @return
-     */
+
     [[nodiscard]] const wchar_t *wc_str();
 
 
@@ -75,15 +72,11 @@ public:
 
     auto operator<=>(const wString &) const = default;
 
-    wchar_t &operator[](int index);
+    wchar_t &operator[](size_t index);
 
     void append(const wString &str);
 
     void append(const wchar_t *str);
-
-
-    //implement insert()
-    void insert(int index, const wString &str);
 
     void push_back(wchar_t c);
 
@@ -105,12 +98,7 @@ public:
             return *this;
         }
 
-        const Iterator operator++(int) {
 
-            Iterator tmp(*this);
-            operator++();
-            return tmp;
-        }
 
         Iterator &operator--() {
 
@@ -118,12 +106,7 @@ public:
             return *this;
         }
 
-        const Iterator operator--(int) {
 
-            Iterator tmp(*this);
-            operator--();
-            return tmp;
-        }
 
         auto operator-(const Iterator &rhs) const {
 
@@ -157,7 +140,7 @@ public:
     Iterator end() { return Iterator(str_ + length_); }
 
     // Erase()
-    void erase(wString::Iterator &, const wchar_t *);
+    void erase(size_t index, size_t count);
 
 private:
     wchar_t *str_;
