@@ -20,19 +20,19 @@ public:
      * Constructor with char*
      * @param str
      */
-    explicit wString(const wchar_t *str);
+    [[maybe_unused]] explicit wString(const wchar_t *str);
 
     /**
      * Copy constructor
      * @param str
      */
-    wString(const wString &str);
+    [[maybe_unused]] wString(const wString &str);
 
     /**
      * Move constructor
      * @param str
      */
-    wString(wString &&str) noexcept;
+    [[maybe_unused]] wString(wString &&str) noexcept;
 
     /**
      * Destructor

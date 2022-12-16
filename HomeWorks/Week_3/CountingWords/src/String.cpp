@@ -12,7 +12,7 @@ wString::wString() : length_(0) {
     str_[0] = '\0';
 }
 
-wString::wString(const wchar_t *str) {
+[[maybe_unused]] wString::wString(const wchar_t *str) {
 
     length_ = std::wcslen(str);
 
@@ -21,14 +21,14 @@ wString::wString(const wchar_t *str) {
     wcscpy(str_, str);
 }
 
-wString::wString(const wString &str) : length_(str.length_) {
+[[maybe_unused]] wString::wString(const wString &str) : length_(str.length_) {
 
     str_ = new wchar_t[length_ + 1];
 
     std::wcscpy(str_, str.str_);
 }
 
-wString::wString(wString &&str) noexcept: length_(str.length_), str_(str.str_) {
+[[maybe_unused]] wString::wString(wString &&str) noexcept: length_(str.length_), str_(str.str_) {
 
     str.length_ = 0;
     str.str_ = nullptr;

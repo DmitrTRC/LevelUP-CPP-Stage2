@@ -13,9 +13,11 @@
 
 std::wstring toLowerRus(std::wstring &, const std::locale &);
 
-void printMap(std::unordered_map<wString, int> &);
+[[maybe_unused]] void printMap(std::unordered_map<std::wstring, int> &);
 
 void trim_punctuation(std::wstring &);
+
+[[maybe_unused]] void strip_punctuation_left_right(std::wstring &str);
 
 using convert_t = std::codecvt_utf8<wchar_t>;
 
