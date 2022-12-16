@@ -8,29 +8,95 @@
 
 #include <cstddef>
 
-const int INITIAL_CAPACITY = 8;
 
+const size_t INITIAL_CAPACITY = 10;
+
+template<typename T>
 class Vector {
 public:
 
-    Vector();
+    Vector() : size_(0), capacity_(INITIAL_CAPACITY) {
 
-    ~Vector();
+        data_ = new T[capacity_];
 
-    void push_back(int value);
+    }
 
-    void resize(size_t new_size);
+    ~Vector() {
 
-    int operator[](size_t index) const;
+        delete[] data_;
 
-    int &operator[](size_t index);
+    }
 
-    [[nodiscard]] size_t size() const;
+    void push_back(T value) {
+
+        if (size_ == capacity_) {
+
+            extend();
+        }
+
+        data_[size_++] = value;
+
+    }
+
+
+    void resize(size_t new_size) {
+
+        if (new_size > capacity_) {
+
+            capacity_ = new_size;
+
+            T *new_data = new T[capacity_];
+
+            for (size_t i = 0; i < size_; ++i) {
+
+                new_data[i] = data_[i];
+            }
+
+            delete[] data_;
+
+            data_ = new_data;
+
+        }
+
+        size_ = new_size;
+
+    }
+
+    T operator[](size_t index) const {
+
+        return data_[index];
+    }
+
+
+    T &operator[](size_t index) {
+
+        return data_[index];
+    }
+
+    [[nodiscard]] size_t size() const {
+
+        return size_;
+    }
 
 private:
-    void extend();
+    void extend() {
 
-    int *data_;
+        capacity_ *= 2;
+
+        T *new_data = new T[capacity_];
+
+        for (size_t i = 0; i < size_; ++i) {
+
+            new_data[i] = data_[i];
+        }
+
+        delete[] data_;
+
+        data_ = new_data;
+
+    }
+
+    T *data_;
     size_t size_;
     size_t capacity_;
 };

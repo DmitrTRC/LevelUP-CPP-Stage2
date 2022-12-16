@@ -6,7 +6,8 @@
 #define LEVELUP_CPP_MAIN_HASH_MAP_HPP
 
 
-#include <vector>
+#include "Vector.hpp"
+
 #include <string>
 
 const int HASH_MAP_SIZE = 100;
@@ -30,7 +31,7 @@ public:
     int &operator[](const std::wstring &);
 
 private:
-    std::vector<HashMapNode *> table_;
+    Vector<HashMapNode *> table_;
 
     static int hashFunction(const std::wstring &key);
 
