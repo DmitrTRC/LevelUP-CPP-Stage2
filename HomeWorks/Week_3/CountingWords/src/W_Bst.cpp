@@ -4,6 +4,7 @@
 
 #include "W_Bst.hpp"
 
+
 wBST::wBST() {
 
     root = nullptr;

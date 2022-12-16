@@ -1,6 +1,10 @@
 //
 // Created by Dmitry Morozov on 20/9/22.
 //
+#define DEBUG_ false
+
+#define USE_STL_ true
+
 #include "Helper.hpp"
 #include "W_Bst.hpp"
 
@@ -10,7 +14,12 @@
 #include <iostream>
 #include <locale>
 #include <sstream>
-// #include <unordered_map>
+
+#if USE_STL_
+
+#include <unordered_map>
+
+#endif
 
 
 int main(int argc, char *argv[]) {
@@ -42,7 +51,12 @@ int main(int argc, char *argv[]) {
 
     std::wstring data;
     //std::unordered_map<std::wstring, int> words;
+
+#if USE_STL_
+    std::unordered_map<std::wstring, int> words;
+#else
     wBST words;
+#endif
 
     std::locale loc = std::locale("ru_RU.UTF-8");
 
@@ -57,8 +71,12 @@ int main(int argc, char *argv[]) {
         auto lWord = toLowerRus(word, loc);
 
         if (!word.empty()) {
-            //  words[lWord]++;
+
+#if USE_STL_
+            words[lWord]++;
+#else
             words.Add(lWord);
+#endif
         }
     }
 
@@ -70,9 +88,13 @@ int main(int argc, char *argv[]) {
         for (size_t i = 2; i < argc; ++i) {
             word_to_search = to_wstring(argv[i]);
             std::wcout << "Searching for word: " << word_to_search << std::endl;
-            //  std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
+
+#if USE_STL_
+            std::wcout << "Word " << word_to_search << " found " << words[word_to_search] << " times" << std::endl;
+#else
             std::wcout << "Word " << word_to_search << " found " << words.Search(word_to_search) << " times"
                        << std::endl;
+#endif
         }
 
     } else {
