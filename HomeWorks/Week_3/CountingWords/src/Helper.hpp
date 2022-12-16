@@ -11,15 +11,15 @@
 #include <iostream>
 #include <unordered_map>
 
-wString toLowerRus(wString &, const std::locale &);
+std::wstring toLowerRus(std::wstring &, const std::locale &);
 
 void printMap(std::unordered_map<wString, int> &);
 
-void trim_punctuation(wString &);
+void trim_punctuation(std::wstring &);
 
 using convert_t = std::codecvt_utf8<wchar_t>;
 
 
-wString to_wstring(const std::string &);
+std::wstring to_wstring(const std::string &);
 
 #endif //LEVELUP_CPP_MAIN_HELPER_HPP

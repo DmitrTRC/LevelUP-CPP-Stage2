@@ -13,9 +13,9 @@
 #include <vector>
 
 
-wString toLowerRus(wString &s, const std::locale &loc) {
+std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
 
-    wString result;
+    std::wstring result;
 
 //    std::transform(s.begin(), s.end(), std::back_inserter(result), [&loc](wchar_t c) {
 //        return std::tolower(c, loc);
@@ -48,7 +48,7 @@ void printMap(std::unordered_map<std::wstring, int> &dict) {
  *
  * @param str The string to be trimmed.
  */
-void trim_punctuation(wString &str) {
+void trim_punctuation(std::wstring &str) {
 
     str.erase(std::remove_if(str.begin(), str.end(), [](wchar_t c) {
         return std::ispunct(c);
@@ -63,7 +63,7 @@ void trim_punctuation(wString &str) {
  *
  * @param str The string to strip punctuation from.
  */
-void strip_punctuation_left_right(wString &str) {
+void strip_punctuation_left_right(std::wstring &str) {
 
     str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) {
         return !std::ispunct(ch);
