@@ -21,17 +21,20 @@ class HashMap {
 public:
     HashMap();
 
-    void insert(const std::wstring &key, int value);
+    void insert(const std::wstring &, int);
 
-    int retrieve(const std::wstring &);
+    int &find_key(const std::wstring &);
 
     bool contains(const std::wstring &);
 
+    int &operator[](const std::wstring &);
 
 private:
     std::vector<HashMapNode *> table_;
 
-    int hashFunction(const std::wstring &key);
+    static int hashFunction(const std::wstring &key);
+
+    constexpr static const int NO_KEY = -1;
 };
 
 

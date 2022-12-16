@@ -19,4 +19,5 @@ add_executable(
         src/Helper.cpp
         src/W_Bst.cpp
         src/String.cpp
-        src/Hash_Map.cpp)
+        src/Hash_Map.cpp
+        src/Vector.cpp)
