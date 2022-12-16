@@ -123,7 +123,7 @@ void String::append(const String &str) {
 
     char *temp = new char[length_ + 1];
 
-    std::strcpy(temp, str_);
+    std::strcpy(temp, this->str_);
     std::strcat(temp, str.str_);
 
     delete[] str_;

@@ -5,6 +5,7 @@
 
 #define USE_STL_ true
 
+#include "Hash_Map.hpp"
 #include "Helper.hpp"
 #include "W_Bst.hpp"
 
