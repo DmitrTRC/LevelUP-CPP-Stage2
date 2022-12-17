@@ -7,6 +7,7 @@
 #include "Hash_Map.hpp"
 #include "Helper.hpp"
 #include "W_Bst.hpp"
+#include "Counter.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -49,11 +50,15 @@ int main(int argc, char *argv[]) {
     std::wstring data;
     //std::unordered_map<std::wstring, int> words;
 
-#if USE_STL_ // TODO: Use option flags
-    std::unordered_map<std::wstring, int> words;
-#else
-    wBST words;
-#endif
+    auto method = argv[argc - 1];
+    if (method == "-hash") {
+        Counter<Hash_Map> counter;
+    } else if (method == "-bst") {
+        Counter<W_Bst> counter;
+    } else {
+        Counter<std::unordered_map> counter;
+    }
+
 
     std::locale loc = std::locale("ru_RU.UTF-8");
 

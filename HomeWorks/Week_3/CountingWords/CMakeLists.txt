@@ -20,4 +20,6 @@ add_executable(
         src/W_Bst.cpp
         src/String.cpp
         src/Hash_Map.cpp
-        src/Vector.cpp)
+        src/Vector.cpp
+        src/Counter.cpp
+)
