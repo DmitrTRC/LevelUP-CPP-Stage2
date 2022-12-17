@@ -29,7 +29,9 @@ int main(int argc, char *argv[]) {
 
 
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <file_name> <word_to_search>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <file_name> <word_to_search> < -options >" << std::endl;
+        std::cerr << "Options: -hash : use HashMap , -bst : use BinarySearch, no-option : use std::unordered_map"
+                  << std::endl;
         return 1;
     }
 

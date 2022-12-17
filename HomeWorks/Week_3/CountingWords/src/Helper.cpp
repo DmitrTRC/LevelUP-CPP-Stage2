@@ -55,23 +55,6 @@ void trim_punctuation(std::wstring &str) {
 }
 
 
-/**
- * It strips punctuation from the left and right of a string.
- *
- * @param str The string to strip punctuation from.
- */
-[[maybe_unused]] void strip_punctuation_left_right(std::wstring &str) {
-
-    str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) {
-        return !std::ispunct(ch);
-    }));
-
-    str.erase(std::find_if(str.rbegin(), str.rend(), [](int ch) {
-        return !std::ispunct(ch);
-    }).base(), str.end());
-}
-
-
 std::wstring to_wstring(const std::string &str) {
 
     return std::wstring_convert<convert_t, wchar_t>{}.from_bytes(str);
