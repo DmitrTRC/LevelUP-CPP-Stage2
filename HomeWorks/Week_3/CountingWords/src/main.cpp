@@ -1,9 +1,8 @@
 //
 // Created by Dmitry Morozov on 20/9/22.
 //
-#define DEBUG_ false
 
-#define USE_STL_ true
+//#define DEBUG_
 
 #include "Hash_Map.hpp"
 #include "Helper.hpp"
@@ -15,12 +14,7 @@
 #include <iostream>
 #include <locale>
 #include <sstream>
-
-#if USE_STL_
-
 #include <unordered_map>
-
-#endif
 
 
 int main(int argc, char *argv[]) {
@@ -55,7 +49,7 @@ int main(int argc, char *argv[]) {
     std::wstring data;
     //std::unordered_map<std::wstring, int> words;
 
-#if USE_STL_
+#if USE_STL_ // TODO: Use option flags
     std::unordered_map<std::wstring, int> words;
 #else
     wBST words;
@@ -78,7 +72,7 @@ int main(int argc, char *argv[]) {
 #if USE_STL_
             words[lWord]++;
 #else
-            words.Add(lWord);
+            words.Add(lWord); // TODO: Add word to the dictionary by [] operator
 #endif
         }
     }
