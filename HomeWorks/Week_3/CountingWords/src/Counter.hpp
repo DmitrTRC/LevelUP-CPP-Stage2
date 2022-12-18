@@ -16,19 +16,34 @@
 template<class T>
 class Counter {
 public:
-    Counter(const std::wstring &buffer) {
+    explicit Counter(const std::wstring &buffer) {
 
+        buffer_ = new std::wistringstream(buffer);
 
     }
 
-    void count();
+    void load();
 
 
     void get(std::wstring &word);
 
 private:
     T map_;
-    std::wstringstream buffer_;
+
+    void adder(std::wstring &word);
+
+    std::wistringstream *buffer_;
 };
+
+template<class T>
+void Counter<T>::load() {
+
+    std::wstring word;
+    while (*buffer_ >> word) {
+        adder(word);
+    }
+
+
+}
 
 #endif //LEVELUP_CPP_MAIN_COUNTER_HPP

@@ -21,6 +21,7 @@ public:
 
     [[nodiscard]] size_t size() const;
 
+
 private:
     struct Node {
         std::wstring word;
