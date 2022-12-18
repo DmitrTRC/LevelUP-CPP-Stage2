@@ -27,8 +27,8 @@ void CounterBase::load_me() {
     load();
 
     auto end = std::chrono::steady_clock::now();
-    std::cerr << "Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " ms"
-              << std::endl;
+    std::cerr << "Time to load MAP : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+              << " ms" << std::endl;
 
 
 }

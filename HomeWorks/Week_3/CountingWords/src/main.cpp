@@ -17,7 +17,7 @@
 #include <iostream>
 #include <locale>
 
-
+#define MEASURE_TIME
 
 int main(int argc, char *argv[]) {
 
@@ -54,6 +54,8 @@ int main(int argc, char *argv[]) {
 
     auto method = argv[argc - 1]; // get method from command line
 
+    std::wcout << std::endl;
+
     CounterBase *counter;
 
     if (strcmp(method, "-hash") == 0) { // use HashMap
@@ -75,7 +77,11 @@ int main(int argc, char *argv[]) {
 
     }
 
+#ifdef MEASURE_TIME
+    counter->load_me();
+#else
     counter->load();
+#endif
 
     if (argc > 2) {
 
@@ -85,11 +91,12 @@ int main(int argc, char *argv[]) {
 
             word_to_search = to_wstring(argv[i]);
 
-            std::wcout << "Searching for word: " << word_to_search << std::endl;
+            std::wcout << "Searching for word: " << word_to_search << std::endl << std::endl;
+
 
             int frequency = counter->get(word_to_search);
 
-            std::wcout << word_to_search << " : " << frequency << " times" << std::endl;
+            std::wcout << word_to_search << " : " << frequency << " times" << std::endl << std::endl;
 
         }
 
