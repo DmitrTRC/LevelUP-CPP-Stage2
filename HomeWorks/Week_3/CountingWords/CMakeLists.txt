@@ -22,4 +22,4 @@ add_executable(
         src/Hash_Map.cpp
         src/Vector.cpp
         src/Counter.cpp
-        src/Counter_Base.cpp src/Counter_Base.hpp src/Counter_Hash_Map.cpp src/Counter_Hash_Map.hpp)
+        src/Counter_Base.cpp src/Counter_Base.hpp src/Counter_Hash_Map.cpp src/Counter_Hash_Map.hpp src/Counter_Bst.cpp src/Counter_Bst.hpp)
