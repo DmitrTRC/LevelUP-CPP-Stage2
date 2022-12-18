@@ -4,6 +4,7 @@
 
 //#define DEBUG_
 
+#include "Counter_Base.hpp"
 #include "Hash_Map.hpp"
 #include "Helper.hpp"
 #include "W_Bst.hpp"
@@ -45,7 +46,6 @@ int main(int argc, char *argv[]) {
 
     std::wstring data;
 
-    std::locale loc = std::locale("ru_RU.UTF-8"); // TODO : Move to Helper.cpp
 
     getline(file, data, std::wstring::traits_type::to_char_type( // read file to data until EOF
             std::wstring::traits_type::eof()));
@@ -53,21 +53,28 @@ int main(int argc, char *argv[]) {
 
     auto method = argv[argc - 1]; // get method from command line
 
+    CounterBase *counter;
+
     if (strcmp(method, "-hash") == 0) { // use HashMap
 
-        Counter<HashMap> counter(data);
+        std::wcout << "Using HashMap" << std::endl;
+        counter = new Counter<HashMap>(data);
         --argc;
 
-    } else if (strcmp(method, "-bst") == 0) { // use Binary Search Tree
+    } else if (strcmp(method, "-bst") == 0) { // use BinarySearchTree
 
-        Counter<wBST> counter(data);
+        std::wcout << "Using BinarySearchTree" << std::endl;
+        counter = new Counter<wBST>(data);
         --argc;
 
-    } else {
+    } else { // use std::unordered_map
 
-        Counter<std::unordered_map<std::wstring, int>> counter(data); // use std::unordered_map
+        std::wcout << "Using std::unordered_map" << std::endl;
+        counter = new Counter<std::unordered_map<std::wstring, int>>(data);
 
     }
+
+    counter->load();
 
     if (argc > 2) {
 
@@ -76,7 +83,12 @@ int main(int argc, char *argv[]) {
         for (size_t i = 2; i < argc; ++i) {
 
             word_to_search = to_wstring(argv[i]);
+
             std::wcout << "Searching for word: " << word_to_search << std::endl;
+
+            int frequency = counter->get(word_to_search);
+
+            std::wcout << word_to_search << " : " << frequency << " times" << std::endl;
 
         }
 

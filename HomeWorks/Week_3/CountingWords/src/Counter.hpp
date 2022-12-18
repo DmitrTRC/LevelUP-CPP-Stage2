@@ -5,6 +5,7 @@
 #ifndef LEVELUP_CPP_MAIN_COUNTER_HPP
 #define LEVELUP_CPP_MAIN_COUNTER_HPP
 
+#include "Counter_Base.hpp"
 #include "Helper.hpp"
 #include "W_Bst.hpp"
 #include "Hash_Map.hpp"
@@ -13,36 +14,28 @@
 #include <sstream>
 #include <unordered_map>
 
-#define MEASURE_TIME
 
 template<class T>
-class Counter {
+class Counter : public CounterBase {
 public:
-    explicit Counter(const std::wstring &buffer) {
+    explicit Counter(const std::wstring &buffer) : CounterBase(buffer) {}
 
-        buffer_ = new std::wistringstream(buffer);
+    void load() override;
 
-    }
-
-    void load();
-
-
-    void get(std::wstring &word);
+    int get(std::wstring &word) override;
 
 private:
     T map_;
 
-    void adder(std::wstring &word);
+    void adder(std::wstring &word) override;
 
-    std::wistringstream *buffer_;
 };
 
 template<class T>
 void Counter<T>::load() {
 
-#ifdef MEASURE_TIME
-    auto start = std::chrono::steady_clock::now();
-#endif
+    std::locale loc = std::locale("ru_RU.UTF-8");
+
 
     std::wstring word;
     while (*buffer_ >> word) {
@@ -56,15 +49,11 @@ void Counter<T>::load() {
 
     }
 
-#ifdef MEASURE_TIME
-    auto end = std::chrono::steady_clock::now();
-    std::cerr << "Time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " ms"
-              << std::endl;
-#endif
+
 }
 
 //Adder for Hash_Map
-template<>
+
 void Counter<HashMap>::adder(std::wstring &word) {
 
     map_[word]++;
@@ -84,6 +73,29 @@ template<>
 void Counter<std::unordered_map<std::wstring, int>>::adder(std::wstring &word) {
 
     map_[word]++;
+
+}
+
+// Getter for Hash_Map
+template<>
+int Counter<HashMap>::get(std::wstring &word) {
+
+    return map_[word];
+
+}
+
+// Getter for BinarySearchTree
+template<>
+int Counter<wBST>::get(std::wstring &word) {
+
+    return map_.Search(word);
+}
+
+// Getter for std::unordered_map
+template<>
+int Counter<std::unordered_map<std::wstring, int>>::get(std::wstring &word) {
+
+    return map_[word];
 
 }
 
