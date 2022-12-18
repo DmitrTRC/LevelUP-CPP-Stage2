@@ -14,13 +14,12 @@
 #include <fstream>
 #include <iostream>
 #include <locale>
-#include <sstream>
 #include <unordered_map>
 
 
 int main(int argc, char *argv[]) {
 
-    if (argc < 2) {
+    if (argc < 2) { // no file name
 
         std::cerr << "Usage: " << argv[0] << " <file_name> <word_to_search> < -options >" << std::endl;
         std::cerr << "Options: -hash : use HashMap , -bst : use BinarySearch, no-option : use std::unordered_map"
@@ -37,7 +36,7 @@ int main(int argc, char *argv[]) {
 
     std::wifstream file(argv[1]);
 
-    if (!file.is_open()) {
+    if (!file.is_open()) {  // check if file is open normally
 
         std::cerr << "Failed to open file: " << argv[1] << std::endl;
 
@@ -48,25 +47,25 @@ int main(int argc, char *argv[]) {
 
     std::locale loc = std::locale("ru_RU.UTF-8"); // TODO : Move to Helper.cpp
 
-    getline(file, data, std::wstring::traits_type::to_char_type(
+    getline(file, data, std::wstring::traits_type::to_char_type( // read file to data until EOF
             std::wstring::traits_type::eof()));
 
 
-    auto method = argv[argc - 1];
+    auto method = argv[argc - 1]; // get method from command line
 
-    if (strcmp(method, "-hash") == 0) {
+    if (strcmp(method, "-hash") == 0) { // use HashMap
 
         Counter<HashMap> counter(data);
         --argc;
 
-    } else if (strcmp(method, "-bst") == 0) {
+    } else if (strcmp(method, "-bst") == 0) { // use Binary Search Tree
 
         Counter<wBST> counter(data);
         --argc;
 
     } else {
 
-        Counter<std::unordered_map<std::wstring, int>> counter(data);
+        Counter<std::unordered_map<std::wstring, int>> counter(data); // use std::unordered_map
 
     }
 
