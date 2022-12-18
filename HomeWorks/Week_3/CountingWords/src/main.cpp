@@ -5,17 +5,18 @@
 //#define DEBUG_
 
 #include "Counter_Base.hpp"
-#include "Hash_Map.hpp"
+#include "Counter.hpp"
+#include "Counter_Bst.hpp"
+#include "Counter_Hash_Map.hpp"
 #include "Helper.hpp"
 #include "W_Bst.hpp"
-#include "Counter.hpp"
 
 #include <algorithm>
 #include <chrono>
 #include <fstream>
 #include <iostream>
 #include <locale>
-#include <unordered_map>
+
 
 
 int main(int argc, char *argv[]) {
@@ -58,19 +59,19 @@ int main(int argc, char *argv[]) {
     if (strcmp(method, "-hash") == 0) { // use HashMap
 
         std::wcout << "Using HashMap" << std::endl;
-        counter = new Counter<HashMap>(data);
+        counter = new CounterHashMap(data);
         --argc;
 
     } else if (strcmp(method, "-bst") == 0) { // use BinarySearchTree
 
         std::wcout << "Using BinarySearchTree" << std::endl;
-        counter = new Counter<wBST>(data);
+        counter = new CounterBST(data);
         --argc;
 
     } else { // use std::unordered_map
 
         std::wcout << "Using std::unordered_map" << std::endl;
-        counter = new Counter<std::unordered_map<std::wstring, int>>(data);
+        counter = new Counter(data);
 
     }
 
