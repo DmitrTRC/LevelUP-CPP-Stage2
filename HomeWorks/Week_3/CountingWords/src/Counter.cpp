@@ -4,4 +4,14 @@
 
 #include "Counter.hpp"
 
-// Header only library
+
+void Counter::adder(std::wstring &word) {
+
+    map_[word]++;
+
+}
+
+int Counter::get(std::wstring &word) {
+
+    return map_[word];
+}
