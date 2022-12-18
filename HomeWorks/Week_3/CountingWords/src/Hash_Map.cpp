@@ -28,7 +28,7 @@ int &HashMap::find_key(const std::wstring &key) {
         node = node->next;
     }
     return const_cast<int &>(NO_KEY);
-    // Return a sentinel value to indicate that the key was not found
+
 }
 
 bool HashMap::contains(const std::wstring &key) {
@@ -57,12 +57,15 @@ int &HashMap::operator[](const std::wstring &key) {
 
     int hash = hashFunction(key);
     HashMapNode *node = table_[hash];
+
     while (node != nullptr) {
         if (node->key == key) {
             return node->value;
         }
         node = node->next;
     }
+
     insert(key, 0);
+
     return find_key(key);
 }
