@@ -17,6 +17,8 @@ public:
 
     void load();
 
+    [[nodiscard]] size_t total_words() const;
+
     void load_me();
 
     virtual int get(std::wstring &word) = 0;
@@ -26,6 +28,9 @@ protected:
     std::wistringstream *buffer_;
 
     virtual void adder(std::wstring &word) = 0;
+
+private:
+    size_t total_words_;
 
 };
 

@@ -83,6 +83,8 @@ int main(int argc, char *argv[]) {
     counter->load();
 #endif
 
+    std::wcout << std::endl << "Total words: " << counter->total_words() << std::endl << std::endl;
+
     if (argc > 2) {
 
         std::wstring word_to_search;
