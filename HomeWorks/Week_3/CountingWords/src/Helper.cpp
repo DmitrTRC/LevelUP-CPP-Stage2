@@ -25,20 +25,18 @@ std::wstring toLowerRus(std::wstring &s, const std::locale &loc) {
     return result;
 }
 
+wString toLowerRus(wString &s, const std::locale &loc) {
 
-[[maybe_unused]] void printMap(std::unordered_map<std::wstring, int> &dict) {
+    wString result;
 
-    // Sort dictionary by value in descending order( Debug purpose only )
-    std::vector<std::pair<std::wstring, int>> vec;
-    std::copy(dict.begin(), dict.end(), std::back_inserter<std::vector<std::pair<std::wstring, int>>>(vec));
-    std::sort(vec.begin(), vec.end(), [](const std::pair<std::wstring, int> &a, const std::pair<std::wstring, int> &b) {
-        return a.second < b.second;
-    });
+    for (auto &c: s) {
+        result.push_back(std::tolower(c, loc));
 
-    for (auto &pair: vec) {
-        std::wcout << pair.first << " : " << pair.second << std::endl;
     }
+
+    return result;
 }
+
 
 /**
  * It removes all punctuation from a string
@@ -51,6 +49,17 @@ void trim_punctuation(std::wstring &str) {
         return std::ispunct(c);
     }), str.end());
 
+
+}
+
+void trim_punctuation(wString &str) { // Non STL
+
+    for (size_t i = 0; i < str.length(); i++) {
+        if (std::ispunct(str[i])) {
+            str.erase(i, 1);
+            i--;
+        }
+    }
 
 }
 

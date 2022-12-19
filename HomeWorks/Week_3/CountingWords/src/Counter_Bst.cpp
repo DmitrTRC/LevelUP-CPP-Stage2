@@ -14,3 +14,4 @@ void CounterBST::adder(std::wstring &word) {
     map_.Add(word);
 
 }
+

@@ -9,17 +9,13 @@
 #include <iostream>
 
 
-CounterBase::CounterBase(const std::wstring &buffer) : total_words_(0) {
+//CounterBase::CounterBase(const std::wstring &buffer) : total_words_(0) {
+//
+//    buffer_ = new std::wistringstream(buffer);
+//
+//}
 
-    buffer_ = new std::wistringstream(buffer);
 
-}
-
-CounterBase::~CounterBase() {
-
-    delete buffer_;
-
-}
 
 void CounterBase::load_me() {
 
@@ -35,28 +31,6 @@ void CounterBase::load_me() {
 
 }
 
-void CounterBase::load() {
-
-    std::locale loc = std::locale("ru_RU.UTF-8");
-
-    std::wstring word;
-
-    while (*buffer_ >> word) {
-        trim_punctuation(word);
-
-        auto lWord = toLowerRus(word, loc);
-
-        if (!word.empty()) {
-
-            adder(word);
-            total_words_++;
-
-        }
-
-    }
-
-
-}
 
 size_t CounterBase::total_words() const {
 

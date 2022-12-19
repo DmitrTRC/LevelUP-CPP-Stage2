@@ -90,7 +90,12 @@ public:
 
     class Iterator {
     public:
-        explicit Iterator(wchar_t *ptr) : ptr_(ptr) {}
+        explicit Iterator(wchar_t *ptr) : ptr_(ptr) {
+
+            index_ = 0;
+
+        }
+
 
         Iterator &operator++() {
 
@@ -99,18 +104,18 @@ public:
         }
 
 
-
         Iterator &operator--() {
 
             --ptr_;
             return *this;
-        }
 
+        }
 
 
         auto operator-(const Iterator &rhs) const {
 
             return ptr_ - rhs.ptr_;
+
         }
 
         auto operator-(const wchar_t *str) const {
@@ -130,8 +135,10 @@ public:
 
         bool operator>(const Iterator &rhs) const { return ptr_ > rhs.ptr_; }
 
+
     private:
         wchar_t *ptr_;
+
     };
 
     Iterator begin() { return Iterator(str_); }
@@ -140,7 +147,8 @@ public:
     Iterator end() { return Iterator(str_ + length_); }
 
     // Erase()
-    void erase(size_t index, size_t count);
+    void erase(size_t index, size_t count = 1);
+
 
 private:
     wchar_t *str_;
