@@ -81,10 +81,6 @@ int main(int argc, char *argv[]) {
 
     }
 
-    if (counter == nullptr) {
-        std::wcerr << "Error: Counter Function is nullptr" << std::endl;
-        return 1;
-    }
 
 #ifdef MEASURE_TIME
     counter->load_me();
