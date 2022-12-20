@@ -12,11 +12,10 @@
 #include <chrono>
 
 
-template<class T>
 class CounterBase {
 public:
 
-    explicit CounterBase(const T &buffer) : total_words_(0) {
+    explicit CounterBase(const std::wstring &buffer) : total_words_(0) {
 
         buffer_ = new std::wistringstream(buffer);
 
@@ -31,13 +30,31 @@ public:
 
     void load_me();
 
-    virtual int get(T &word) = 0;
+    virtual int get(wString &word) {
+
+        throw std::runtime_error("Not implemented");
+    };
+
+    virtual int get(std::wstring &word) {
+
+        throw std::runtime_error("Not implemented");
+    }
 
 protected:
 
     std::wistringstream *buffer_;
 
-    virtual void adder(T &word) = 0;
+    virtual void adder(wString &word) {
+
+        throw std::runtime_error("Not implemented");
+
+
+    }
+
+    virtual void adder(std::wstring &word) {
+
+        throw std::runtime_error("Not implemented");
+    }
 
 private:
     size_t total_words_;
@@ -46,19 +63,17 @@ private:
 };
 
 
-template<class T>
-CounterBase<T>::~CounterBase() {
+CounterBase::~CounterBase() {
 
     delete buffer_;
 
 }
 
-template<class T>
-void CounterBase<T>::load() {
+void CounterBase::load() {
 
     std::locale loc = std::locale("ru_RU.UTF-8");
 
-    T word;
+    wString word;
 
     while (*buffer_ >> word) {
         trim_punctuation(word);
@@ -77,8 +92,7 @@ void CounterBase<T>::load() {
 
 }
 
-template<class T>
-void CounterBase<T>::load_me() {
+void CounterBase::load_me() {
 
     auto start = std::chrono::steady_clock::now();
 
@@ -92,8 +106,8 @@ void CounterBase<T>::load_me() {
 
 }
 
-template<class T>
-size_t CounterBase<T>::total_words() const {
+
+size_t CounterBase::total_words() const {
 
     return total_words_;
 

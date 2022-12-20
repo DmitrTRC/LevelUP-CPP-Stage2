@@ -3,14 +3,16 @@
 //
 
 #include "Counter_Hash_Map.hpp"
+#include "String.hpp"
 
-void CounterHashMap::adder(std::wstring &word) {
+
+void CounterHashMap::adder(wString &word) {
 
     map_[word]++;
 
 }
 
-int CounterHashMap::get(std::wstring &word) {
+int CounterHashMap::get(wString &word) {
 
     return map_[word];
 }

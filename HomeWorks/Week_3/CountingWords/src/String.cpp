@@ -164,6 +164,7 @@ void wString::push_back(wchar_t c) {
 
 }
 
+
 void wString::erase(size_t index, size_t count) {
 
     if (index >= length_) {
@@ -187,6 +188,19 @@ void wString::erase(size_t index, size_t count) {
     delete[] str_;
 
     str_ = temp;
+
+
+}
+
+void wString::setString(const wchar_t *str) {
+
+    delete[] str_;
+
+    length_ = std::wcslen(str);
+
+    str_ = new wchar_t[length_ + 1];
+
+    std::wcscpy(str_, str);
 
 
 }

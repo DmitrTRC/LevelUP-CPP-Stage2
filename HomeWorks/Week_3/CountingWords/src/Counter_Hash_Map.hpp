@@ -5,25 +5,27 @@
 #ifndef LEVELUP_CPP_MAIN_COUNTER_HASH_MAP_HPP
 #define LEVELUP_CPP_MAIN_COUNTER_HASH_MAP_HPP
 
+
 #include "Counter_Base.hpp"
 #include "Hash_Map.hpp"
+#include "String.hpp"
 
 #include <sstream>
 
 
-class CounterHashMap : public CounterBase<std::wstring> {
+class CounterHashMap : public CounterBase {
 
 
 public:
     explicit CounterHashMap(const std::wstring &buffer) : CounterBase(buffer) {}
 
 
-    int get(std::wstring &word) override;
+    int get(wString &word) override;
 
 private:
-    HashMap map_;
+    HashMap<wString> map_;
 
-    void adder(std::wstring &word) override;
+    void adder(wString &word) override;
 
 };
 

@@ -19,7 +19,7 @@ wBST::~wBST() {
 
 }
 
-void wBST::Add(std::wstring &word) {
+void wBST::Add(wString &word) {
 
     if (root == nullptr) {
 
@@ -35,7 +35,7 @@ void wBST::Add(std::wstring &word) {
 
 }
 
-void wBST::AddWord(wBST::Node *node, std::wstring &word) {
+void wBST::AddWord(wBST::Node *node, wString &word) {
 
     if (word == node->word) {
 
@@ -84,7 +84,7 @@ void wBST::DeleteTree(wBST::Node *node) {
 
 }
 
-int wBST::Search(std::wstring &word) {
+int wBST::Search(wString &word) {
 
     if (root == nullptr) {
 
@@ -98,7 +98,7 @@ int wBST::Search(std::wstring &word) {
 
 }
 
-int wBST::SearchWord(wBST::Node *node, std::wstring &word) {
+int wBST::SearchWord(wBST::Node *node, wString &word) {
 
     if (word == node->word) {
 

@@ -6,10 +6,10 @@
 
 #include "Counter_Base.hpp"
 #include "Counter.hpp"
-#include "Counter_Bst.hpp"
-#include "Counter_Hash_Map.hpp"
-#include "Helper.hpp"
-#include "W_Bst.hpp"
+//#include "Counter_Bst.hpp"
+//#include "Counter_Hash_Map.hpp"
+//#include "Helper.hpp"
+//#include "W_Bst.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -60,19 +60,21 @@ int main(int argc, char *argv[]) {
 
     std::wcout << std::endl;
 
-    CounterBase<std::wstring> *counter = {};
+    CounterBase *counter;
 
     if (strcmp(method, "-hash") == 0) { // use HashMap
 
-        std::wcout << "Using HashMap" << std::endl;
-        counter = new CounterHashMap(data);
-        --argc;
+//        std::wcout << "Using HashMap" << std::endl;
+//        counter = new CounterHashMap(data);
+//        --argc;
 
     } else if (strcmp(method, "-bst") == 0) { // use BinarySearchTree
 
-        std::wcout << "Using BinarySearchTree" << std::endl;
-        counter = new CounterBST(data);
-        --argc;
+        throw std::runtime_error("Not implemented yet");
+//
+//        std::wcout << "Using BinarySearchTree" << std::endl;
+//        counter = new CounterBST(data);
+//        --argc;
 
     } else { // use std::unordered_map
 

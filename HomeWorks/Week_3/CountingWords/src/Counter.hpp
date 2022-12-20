@@ -12,7 +12,7 @@
 #include <unordered_map>
 
 
-class Counter : public CounterBase<std::wstring> {
+class Counter : public CounterBase {
 public:
     explicit Counter(const std::wstring &buffer) : CounterBase(buffer) {}
 

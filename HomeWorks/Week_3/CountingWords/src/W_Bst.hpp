@@ -5,7 +5,7 @@
 #ifndef LEVELUP_CPP_MAIN_W_BST_HPP
 #define LEVELUP_CPP_MAIN_W_BST_HPP
 
-#include <string>
+#include "String.hpp"
 
 
 class wBST {
@@ -15,29 +15,29 @@ public:
 
     ~wBST();
 
-    void Add(std::wstring &word);
+    void Add(wString &word);
 
-    int Search(std::wstring &word);
+    int Search(wString &word);
 
     [[nodiscard]] size_t size() const;
 
 
 private:
     struct Node {
-        std::wstring word;
+        wString word;
         int count;
         Node *left;
         Node *right;
 
-        explicit Node(std::wstring &word) : word(word), count(1), left(nullptr), right(nullptr) {}
+        explicit Node(wString &word) : word(word), count(1), left(nullptr), right(nullptr) {}
 
     };
 
     Node *root;
 
-    void AddWord(Node *node, std::wstring &word);
+    void AddWord(Node *node, wString &word);
 
-    int SearchWord(Node *node, std::wstring &word);
+    int SearchWord(Node *node, wString &word);
 
     void DeleteTree(Node *node);
 

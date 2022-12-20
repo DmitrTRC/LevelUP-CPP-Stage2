@@ -6,24 +6,25 @@
 #define LEVELUP_CPP_MAIN_COUNTER_BST_HPP
 
 #include "Counter_Base.hpp"
+#include "String.hpp"
 #include "W_Bst.hpp"
 
 #include <sstream>
 
 
-class CounterBST : public CounterBase<std::wstring> {
+class CounterBST : public CounterBase {
 
 
 public:
     explicit CounterBST(const std::wstring &buffer) : CounterBase(buffer) {}
 
 
-    int get(std::wstring &word) override;
+    int get(wString &word) override;
 
 private:
     wBST map_;
 
-    void adder(std::wstring &word) override;
+    void adder(wString &word) override;
 
 };
 

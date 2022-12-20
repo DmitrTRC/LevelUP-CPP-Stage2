@@ -28,6 +28,7 @@ public:
      */
     [[maybe_unused]] wString(const wString &str);
 
+
     /**
      * Move constructor
      * @param str
@@ -46,6 +47,7 @@ public:
      */
     [[nodiscard]] inline size_t length() const { return length_; }
 
+    void setString(const wchar_t *str);
 
     [[nodiscard]] const wchar_t *wc_str();
 
@@ -85,6 +87,19 @@ public:
         wos << str.str_;
         return wos;
     };
+
+    // operator >>
+
+    friend std::wistream &operator>>(std::wistream &wos, wString &str) {
+
+        std::wstring temp;
+        wos >> temp;
+        str.setString(temp.c_str());
+
+
+        return wos;
+    };
+
 
     void clear();
 
@@ -139,10 +154,10 @@ public:
 
     };
 
-    Iterator begin() { return Iterator(str_); }
+    Iterator begin() const { return Iterator(str_); }
 
     // Return iterator to end of string
-    Iterator end() { return Iterator(str_ + length_); }
+    Iterator end() const { return Iterator(str_ + length_); }
 
     // Erase()
     void erase(size_t index, size_t count = 1);
