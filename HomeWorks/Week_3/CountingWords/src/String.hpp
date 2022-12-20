@@ -92,8 +92,6 @@ public:
     public:
         explicit Iterator(wchar_t *ptr) : ptr_(ptr) {
 
-            index_ = 0;
-
         }
 
 

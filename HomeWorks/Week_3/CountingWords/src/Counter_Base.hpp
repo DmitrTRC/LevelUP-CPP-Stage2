@@ -5,11 +5,12 @@
 #ifndef LEVELUP_CPP_MAIN_COUNTER_BASE_HPP
 #define LEVELUP_CPP_MAIN_COUNTER_BASE_HPP
 
+#include "Helper.hpp"
 #include "String.hpp"
 
 #include <sstream>
 #include <chrono>
-#include <variant>
+
 
 template<class T>
 class CounterBase {
@@ -41,9 +42,9 @@ protected:
 private:
     size_t total_words_;
 
+
 };
 
-//Destructor
 
 template<class T>
 CounterBase<T>::~CounterBase() {
@@ -64,15 +65,37 @@ void CounterBase<T>::load() {
 
         auto lWord = toLowerRus(word, loc);
 
-        if (!word.empty()) {
+        if (!lWord.empty()) {
 
-            adder(word);
+            adder(lWord);
             total_words_++;
 
         }
 
     }
 
+
+}
+
+template<class T>
+void CounterBase<T>::load_me() {
+
+    auto start = std::chrono::steady_clock::now();
+
+    load();
+
+    auto end = std::chrono::steady_clock::now();
+
+    std::cerr << "Time to load MAP : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
+              << " ms" << std::endl;
+
+
+}
+
+template<class T>
+size_t CounterBase<T>::total_words() const {
+
+    return total_words_;
 
 }
 

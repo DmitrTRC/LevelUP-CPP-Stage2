@@ -11,7 +11,7 @@
 #include <sstream>
 
 
-class CounterBST : public CounterBase {
+class CounterBST : public CounterBase<std::wstring> {
 
 
 public:

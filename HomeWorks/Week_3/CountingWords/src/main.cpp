@@ -19,6 +19,10 @@
 
 #define MEASURE_TIME
 
+//TODO: Remove from this place to Helper.hpp
+
+
+
 int main(int argc, char *argv[]) {
 
     if (argc < 2) { // no file name
@@ -56,7 +60,7 @@ int main(int argc, char *argv[]) {
 
     std::wcout << std::endl;
 
-    CounterBase *counter;
+    CounterBase<std::wstring> *counter = {};
 
     if (strcmp(method, "-hash") == 0) { // use HashMap
 
@@ -75,6 +79,11 @@ int main(int argc, char *argv[]) {
         std::wcout << "Using std::unordered_map" << std::endl;
         counter = new Counter(data);
 
+    }
+
+    if (counter == nullptr) {
+        std::wcerr << "Error: Counter Function is nullptr" << std::endl;
+        return 1;
     }
 
 #ifdef MEASURE_TIME

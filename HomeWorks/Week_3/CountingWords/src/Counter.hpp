@@ -8,13 +8,11 @@
 #include "Counter_Base.hpp"
 
 
-
 #include <sstream>
 #include <unordered_map>
-#include <variant>
 
 
-class Counter : public CounterBase {
+class Counter : public CounterBase<std::wstring> {
 public:
     explicit Counter(const std::wstring &buffer) : CounterBase(buffer) {}
 

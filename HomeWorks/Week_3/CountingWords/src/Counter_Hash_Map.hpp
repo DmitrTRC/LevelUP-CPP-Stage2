@@ -11,7 +11,7 @@
 #include <sstream>
 
 
-class CounterHashMap : public CounterBase {
+class CounterHashMap : public CounterBase<std::wstring> {
 
 
 public:

@@ -11,6 +11,7 @@
 #include <iostream>
 #include <unordered_map>
 
+
 std::wstring toLowerRus(std::wstring &, const std::locale &);
 
 wString toLowerRus(wString &, const std::locale &);
