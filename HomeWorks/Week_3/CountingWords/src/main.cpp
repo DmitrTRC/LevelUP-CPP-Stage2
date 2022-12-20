@@ -4,12 +4,8 @@
 
 //#define DEBUG_
 
-#include "Counter_Base.hpp"
-#include "Counter.hpp"
-//#include "Counter_Bst.hpp"
-//#include "Counter_Hash_Map.hpp"
-//#include "Helper.hpp"
-//#include "W_Bst.hpp"
+#include "main.hpp"
+
 
 #include <algorithm>
 #include <chrono>
