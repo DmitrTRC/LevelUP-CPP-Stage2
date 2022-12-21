@@ -205,6 +205,36 @@ void wString::setString(const wchar_t *str) {
 
 }
 
+bool wString::operator==(const wString &rhs) const {
+
+    return wcscmp(str_, rhs.str_) == 0;
+}
+
+bool wString::operator!=(const wString &rhs) const {
+
+    return !(rhs == *this);
+}
+
+bool wString::operator<(const wString &rhs) const {
+
+    return wcscmp(str_, rhs.str_) < 0;
+}
+
+bool wString::operator>(const wString &rhs) const {
+
+    return rhs < *this;
+}
+
+bool wString::operator<=(const wString &rhs) const {
+
+    return !(rhs < *this);
+}
+
+bool wString::operator>=(const wString &rhs) const {
+
+    return !(*this < rhs);
+}
+
 
 template<typename T>
 wString &wString::operator+=(T &str) {

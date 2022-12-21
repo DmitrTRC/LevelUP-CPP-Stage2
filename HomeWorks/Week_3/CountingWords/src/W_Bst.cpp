@@ -100,7 +100,8 @@ int wBST::Search(wString &word) {
 
 int wBST::SearchWord(wBST::Node *node, wString &word) {
 
-    if (word == node->word) {
+    auto tmp = node->word;
+    if (word == tmp) {
 
         return node->count;
 

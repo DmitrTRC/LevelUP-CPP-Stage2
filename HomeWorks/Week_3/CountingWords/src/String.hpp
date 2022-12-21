@@ -72,7 +72,18 @@ public:
         return result;
     }
 
-    auto operator<=>(const wString &) const = default;
+    //auto operator<=>(const wString &) const = default;
+    bool operator==(const wString &rhs) const;
+
+    bool operator!=(const wString &rhs) const;
+
+    bool operator<(const wString &rhs) const;
+
+    bool operator>(const wString &rhs) const;
+
+    bool operator<=(const wString &rhs) const;
+
+    bool operator>=(const wString &rhs) const;
 
     wchar_t &operator[](size_t index);
 
