@@ -13,6 +13,6 @@ TEST(String, DefaultConstructor) {
 
     EXPECT_EQ(str.length(), 0);
 
-    EXPECT_STREQ(str.c_str(), "");
+    EXPECT_STREQ(reinterpret_cast<const char *>(str.c_str()), "");
 
 }
