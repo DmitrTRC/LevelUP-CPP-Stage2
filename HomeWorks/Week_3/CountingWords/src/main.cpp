@@ -6,6 +6,13 @@
 
 #include "main.hpp"
 
+#include "Counter_Base.hpp"
+#include "Counter.hpp"
+#include "Counter_Bst.hpp"
+#include "Counter_Hash_Map.hpp"
+#include "Helper.hpp"
+#include "W_Bst.hpp"
+
 
 #include <algorithm>
 #include <chrono>
@@ -60,9 +67,9 @@ int main(int argc, char *argv[]) {
 
     if (strcmp(method, "-hash") == 0) { // use HashMap
 
-//        std::wcout << "Using HashMap" << std::endl;
-//        counter = new CounterHashMap(data);
-//        --argc;
+        std::wcout << "Using HashMap" << std::endl;
+        counter = new CounterHashMap(data);
+        --argc;
 
     } else if (strcmp(method, "-bst") == 0) { // use BinarySearchTree
 
