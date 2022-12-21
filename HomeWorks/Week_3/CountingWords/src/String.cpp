@@ -39,7 +39,7 @@ wString::~wString() {
     delete[] str_;
 }
 
-const wchar_t *wString::wc_str() {
+const wchar_t *wString::c_str() {
 
     return str_;
 }

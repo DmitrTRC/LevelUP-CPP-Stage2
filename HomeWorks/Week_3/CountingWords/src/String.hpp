@@ -49,7 +49,7 @@ public:
 
     void setString(const wchar_t *str);
 
-    [[nodiscard]] const wchar_t *wc_str();
+    [[nodiscard]] const wchar_t *c_str();
 
 
     [[nodiscard]] inline bool empty() const { return length_ == 0; }
@@ -165,10 +165,10 @@ public:
 
     };
 
-    Iterator begin() const { return Iterator(str_); }
+    [[nodiscard]] Iterator begin() const { return Iterator(str_); }
 
     // Return iterator to end of string
-    Iterator end() const { return Iterator(str_ + length_); }
+    [[nodiscard]] Iterator end() const { return Iterator(str_ + length_); }
 
     // Erase()
     void erase(size_t index, size_t count = 1);
