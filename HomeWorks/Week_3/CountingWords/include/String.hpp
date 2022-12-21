@@ -49,8 +49,9 @@ public:
 
     void setString(const wchar_t *str);
 
-    [[nodiscard]] const wchar_t *c_str();
+    [[nodiscard]] const wchar_t *wc_str();
 
+    const char *c_str();
 
     [[nodiscard]] inline bool empty() const { return length_ == 0; }
 
@@ -61,8 +62,10 @@ public:
 
     wString &operator=(const wchar_t *str);
 
-    template<typename T>
-    wString &operator+=(T &str);
+
+    wString &operator+=(wString &);
+
+    wString &operator+(const wchar_t *);
 
     template<typename T, typename Y>
     friend wString operator+(T &lhs_str, Y &rhs_str) {
@@ -99,7 +102,6 @@ public:
         return wos;
     };
 
-    // operator >>
 
     friend std::wistream &operator>>(std::wistream &wos, wString &str) {
 
@@ -169,6 +171,7 @@ public:
 
     // Return iterator to end of string
     [[nodiscard]] Iterator end() const { return Iterator(str_ + length_); }
+
 
     // Erase()
     void erase(size_t index, size_t count = 1);

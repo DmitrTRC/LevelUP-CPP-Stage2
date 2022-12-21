@@ -39,7 +39,7 @@ wString::~wString() {
     delete[] str_;
 }
 
-const wchar_t *wString::c_str() {
+const wchar_t *wString::wc_str() {
 
     return str_;
 }
@@ -235,9 +235,20 @@ bool wString::operator>=(const wString &rhs) const {
     return !(*this < rhs);
 }
 
+const char *wString::c_str() {
 
-template<typename T>
-wString &wString::operator+=(T &str) {
+    return reinterpret_cast<const char *>(str_);
+}
+
+
+wString &wString::operator+=(wString &str) {
+
+    append(str);
+
+    return *this;
+}
+
+wString &wString::operator+(const wchar_t *str) {
 
     append(str);
 
