@@ -19,12 +19,14 @@ public:
     explicit CounterBST(const std::wstring &buffer) : CounterBase(buffer) {}
 
 
-    int get(wString &word) override;
+    int get(wString &) override;
+
+    int get(std::wstring &) override;
 
 private:
     wBST map_;
 
-    void adder(wString &word) override;
+    void adder(wString &) override;
 
 };
 

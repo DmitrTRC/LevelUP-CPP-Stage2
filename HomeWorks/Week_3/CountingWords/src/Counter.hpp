@@ -16,6 +16,7 @@ class Counter : public CounterBase {
 public:
     explicit Counter(const std::wstring &buffer) : CounterBase(buffer) {}
 
+    void load() override;
 
     int get(std::wstring &word) override;
 

@@ -16,3 +16,10 @@ int CounterHashMap::get(wString &word) {
 
     return map_[word];
 }
+
+int CounterHashMap::get(std::wstring &word) {
+
+    wString temp_wS(word.c_str());
+
+    return map_[temp_wS];
+}

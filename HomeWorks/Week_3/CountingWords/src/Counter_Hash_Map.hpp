@@ -22,6 +22,8 @@ public:
 
     int get(wString &word) override;
 
+    int get(std::wstring &word) override;
+
 private:
     HashMap<wString> map_;
 

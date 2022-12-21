@@ -73,11 +73,9 @@ int main(int argc, char *argv[]) {
 
     } else if (strcmp(method, "-bst") == 0) { // use BinarySearchTree
 
-        throw std::runtime_error("Not implemented yet");
-//
-//        std::wcout << "Using BinarySearchTree" << std::endl;
-//        counter = new CounterBST(data);
-//        --argc;
+        std::wcout << "Using BinarySearchTree" << std::endl;
+        counter = new CounterBST(data);
+        --argc;
 
     } else { // use std::unordered_map
 

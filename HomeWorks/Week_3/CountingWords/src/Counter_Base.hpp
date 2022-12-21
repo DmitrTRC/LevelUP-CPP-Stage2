@@ -24,7 +24,7 @@ public:
 
     ~CounterBase();
 
-    void load();
+    virtual void load();
 
     [[nodiscard]] size_t total_words() const;
 
@@ -32,11 +32,13 @@ public:
 
     virtual int get(wString &word) {
 
+        std::cerr << "Base::get<Wstring>" << std::endl;
         throw std::runtime_error("Not implemented");
     };
 
     virtual int get(std::wstring &word) {
 
+        std::cerr << "Base::get<wstring>" << std::endl;
         throw std::runtime_error("Not implemented");
     }
 
@@ -46,6 +48,7 @@ protected:
 
     virtual void adder(wString &word) {
 
+        std::cerr << "Base::adder<wString>" << std::endl;
         throw std::runtime_error("Not implemented");
 
 
@@ -53,10 +56,10 @@ protected:
 
     virtual void adder(std::wstring &word) {
 
+        std::cerr << "Base::adder<wstring>" << std::endl;
         throw std::runtime_error("Not implemented");
     }
 
-private:
     size_t total_words_;
 
 

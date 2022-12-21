@@ -11,16 +11,16 @@ CounterBase::~CounterBase() {
 
 }
 
-void CounterBase::load() {
+  void CounterBase::load() {
 
-    std::locale loc = std::locale("ru_RU.UTF-8");
+      std::locale loc = std::locale("ru_RU.UTF-8");
 
-    wString word;
+      wString word;
 
-    while (*buffer_ >> word) {
-        trim_punctuation(word);
+      while (*buffer_ >> word) {
+          trim_punctuation(word);
 
-        auto lWord = toLowerRus(word, loc);
+          auto lWord = toLowerRus(word, loc);
 
         if (!lWord.empty()) {
 
