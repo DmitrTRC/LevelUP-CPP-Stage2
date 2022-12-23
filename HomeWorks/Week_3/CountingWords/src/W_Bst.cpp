@@ -15,7 +15,6 @@ wBST::wBST() {
 wBST::~wBST() {
 
     DeleteTree(root);
-    root = nullptr;
 
 }
 

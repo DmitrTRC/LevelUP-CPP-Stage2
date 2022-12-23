@@ -17,7 +17,7 @@ int CounterHashMap::get(wString &word) {
     return map_[word];
 }
 
-int CounterHashMap::get(std::wstring &word) {
+int CounterHashMap::get(std::wstring &word) { // Fixme: wstring -> wString
 
     wString temp_wS(word.c_str());
 
