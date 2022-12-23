@@ -236,7 +236,6 @@ bool wString::operator>=(const wString &rhs) const {
 }
 
 
-
 wString &wString::operator+=(wString &str) {
 
     append(str);
@@ -249,6 +248,12 @@ wString &wString::operator+(const wchar_t *str) {
     append(str);
 
     return *this;
+}
+
+bool wString::operator==(const wchar_t *rhs) const {
+
+    return wcscmp(str_, rhs) == 0;
+
 }
 
 

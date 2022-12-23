@@ -9,6 +9,7 @@ add_executable(Words_Tests_run
                src/wString_test.cpp
                src/wBst_test.cpp
                src/vector_test.cpp
+               src/helper_test.cpp
                )
 
 target_link_libraries(Words_Tests_run

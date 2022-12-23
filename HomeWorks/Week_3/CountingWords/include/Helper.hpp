@@ -21,12 +21,6 @@ void trim_punctuation(std::wstring &);
 
 void trim_punctuation(wString &);
 
-
-void strip_punctuation_left_right(std::wstring &str);
-
-void strip_punctuation_left_right(wString &str);
-
-
 using convert_t = std::codecvt_utf8<wchar_t>;
 
 

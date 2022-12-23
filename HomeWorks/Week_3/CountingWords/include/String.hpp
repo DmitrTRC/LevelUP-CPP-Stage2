@@ -75,6 +75,8 @@ public:
 
     bool operator==(const wString &rhs) const;
 
+    bool operator==(const wchar_t *rhs) const;
+
     bool operator!=(const wString &rhs) const;
 
     bool operator<(const wString &rhs) const;
