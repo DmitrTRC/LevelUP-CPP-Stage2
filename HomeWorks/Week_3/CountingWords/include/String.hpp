@@ -51,8 +51,6 @@ public:
 
     [[nodiscard]] const wchar_t *wc_str();
 
-    const char *c_str();
-
     [[nodiscard]] inline bool empty() const { return length_ == 0; }
 
     template<typename T>
@@ -75,7 +73,6 @@ public:
         return result;
     }
 
-    //auto operator<=>(const wString &) const = default;
     bool operator==(const wString &rhs) const;
 
     bool operator!=(const wString &rhs) const;

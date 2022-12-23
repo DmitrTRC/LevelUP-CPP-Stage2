@@ -235,10 +235,6 @@ bool wString::operator>=(const wString &rhs) const {
     return !(*this < rhs);
 }
 
-const char *wString::c_str() {
-
-    return reinterpret_cast<const char *>(str_);
-}
 
 
 wString &wString::operator+=(wString &str) {

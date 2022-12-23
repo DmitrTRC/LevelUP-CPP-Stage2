@@ -13,7 +13,7 @@ TEST(String, DefaultConstructor) {
 
     EXPECT_EQ(str.length(), 0);
 
-    EXPECT_STREQ(reinterpret_cast<const char *>(str.c_str()), "");
+    EXPECT_STREQ(reinterpret_cast<const char *>(str.wc_str()), "");
 
 }
 
@@ -240,3 +240,67 @@ TEST(String, Erase2) {
 
 }
 
+
+TEST(String, Length) {
+
+    wString str(L"Hello");
+
+    EXPECT_EQ(str.length(), 5);
+
+}
+
+TEST(String, setString) {
+
+    wString str(L"Hello");
+
+    str.setString(L"World");
+
+    EXPECT_EQ(str.length(), 5);
+
+    EXPECT_STREQ(str.wc_str(), L"World");
+
+}
+
+TEST(String, wc_str) {
+
+    wString str(L"Hello");
+
+    EXPECT_STREQ(str.wc_str(), L"Hello");
+
+}
+
+TEST(String, wostrem_output) {
+
+    wString str(L"Hello");
+
+    std::wstringstream ss;
+
+    ss << str;
+
+    EXPECT_STREQ(ss.str().c_str(), L"Hello");
+
+}
+
+TEST(String, wistream_input) {
+
+    wString str;
+
+    std::wstringstream ss(L"Hello");
+
+    ss >> str;
+
+    EXPECT_STREQ(str.wc_str(), L"Hello");
+
+}
+
+TEST(String, Clear) {
+
+    wString str(L"Hello");
+
+    str.clear();
+
+    EXPECT_EQ(str.length(), 0);
+
+    EXPECT_STREQ(str.wc_str(), L"");
+
+}
