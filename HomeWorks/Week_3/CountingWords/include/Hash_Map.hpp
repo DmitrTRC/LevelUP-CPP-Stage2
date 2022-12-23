@@ -32,6 +32,14 @@ public:
 
     int &operator[](T &);
 
+    [[nodiscard]] size_t size() const;
+
+    [[nodiscard]] size_t capacity() const;
+
+    [[nodiscard]] double load_factor() const;
+
+    double max_load_factor() const;
+
 private:
     Vector<HashMapNode<T> *> table_;
 
@@ -39,6 +47,26 @@ private:
 
     constexpr static const int NO_KEY = -1;
 };
+
+template<class T>
+double HashMap<T>::load_factor() const {
+
+    return (double) size() / capacity();
+
+}
+
+template<class T>
+size_t HashMap<T>::capacity() const {
+
+    return table_.size();
+}
+
+template<class T>
+size_t HashMap<T>::size() const {
+
+    return table_.size();
+
+}
 
 
 template<class T>
