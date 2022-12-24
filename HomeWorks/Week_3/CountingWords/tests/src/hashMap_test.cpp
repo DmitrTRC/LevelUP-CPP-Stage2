@@ -22,9 +22,16 @@ TEST(HashMap, Constructor) {
     HashMap<std::string> map;
 
     EXPECT_EQ(map.size(), HASH_MAP_SIZE);
-    EXPECT_EQ(map.capacity(), HASH_MAP_SIZE); //TODO: check if it is correct
-//    EXPECT_EQ(map.load_factor(), 0);
-//    EXPECT_EQ(map.max_load_factor(), 0.75);
+    EXPECT_EQ(map.capacity(), 0); //TODO: check if it is correct
+    EXPECT_EQ(map.load_factor(), 0);
+
+}
+
+TEST(HashMap, MaxLoadFactor) {
+
+    HashMap<std::string> map;
+
+    EXPECT_EQ(map.max_load_factor(), 0.75);
 
 }
 

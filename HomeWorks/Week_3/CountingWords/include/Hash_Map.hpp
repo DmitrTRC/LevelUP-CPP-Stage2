@@ -10,7 +10,7 @@
 
 #include <string>
 
-const int HASH_MAP_SIZE = 100;
+constexpr int HASH_MAP_SIZE = 26 + 33; // 26 English letters + 33 Russian letters
 
 template<class T>
 struct HashMapNode {
@@ -36,29 +36,38 @@ public:
 
     [[nodiscard]] size_t capacity() const;
 
-    [[nodiscard]] double load_factor() const;
+    [[maybe_unused]] [[nodiscard]] double load_factor() const;
 
     double max_load_factor() const;
 
 private:
     Vector<HashMapNode<T> *> table_;
+    constexpr static const int NO_KEY = -1;
+    size_t capacity_ = 0;
 
     int hashFunction(T &key);
 
-    constexpr static const int NO_KEY = -1;
 };
 
 template<class T>
-double HashMap<T>::load_factor() const {
+double HashMap<T>::max_load_factor() const {
 
-    return (double) size() / capacity();
+    return 0.75; //TODO: check if it is correct
+
+}
+
+template<class T>
+[[maybe_unused]] double HashMap<T>::load_factor() const {
+
+    return (double) capacity() / size();
 
 }
 
 template<class T>
 size_t HashMap<T>::capacity() const {
 
-    return table_.size();
+    return capacity_;
+
 }
 
 template<class T>
@@ -73,6 +82,7 @@ template<class T>
 HashMap<T>::HashMap() {
 
     table_.resize(HASH_MAP_SIZE);
+
 }
 
 template<class T>
@@ -81,6 +91,9 @@ void HashMap<T>::insert(T &key, int value) {
     int hash = hashFunction(key);
     auto *newNode = new HashMapNode<T>{key, value, table_[hash]};
     table_[hash] = newNode;
+
+    ++capacity_;
+
 }
 
 template<class T>
