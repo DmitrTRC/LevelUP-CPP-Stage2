@@ -35,3 +35,52 @@ TEST(HashMap, MaxLoadFactor) {
 
 }
 
+TEST(HashMap, Insert) {
+
+    HashMap<std::string> map;
+
+    std::string key = "key";
+
+    map.insert(key, 3);
+
+    EXPECT_EQ(map.capacity(), 1);
+    //   EXPECT_EQ(map.load_factor(), 1.0 / HASH_MAP_SIZE);
+
+}
+
+TEST(HashMap, FindKey) {
+
+    HashMap<std::string> map;
+
+    std::string key = "key";
+
+    map.insert(key, 3);
+
+    EXPECT_EQ(map.find_key(key), 3);
+
+}
+
+TEST(HashMap, Contains) {
+
+    HashMap<std::string> map;
+
+    std::string key = "key";
+
+    map.insert(key, 3);
+
+    EXPECT_TRUE(map.contains(key));
+
+}
+
+TEST(HashMap, Operator_index) {
+
+    HashMap<std::string> map;
+
+    std::string key = "key";
+
+    map.insert(key, 3);
+
+    EXPECT_EQ(map[key], 3);
+
+}
+

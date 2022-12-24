@@ -38,7 +38,7 @@ public:
 
     [[maybe_unused]] [[nodiscard]] double load_factor() const;
 
-    double max_load_factor() const;
+    [[nodiscard]] double max_load_factor() const;
 
 private:
     Vector<HashMapNode<T> *> table_;
