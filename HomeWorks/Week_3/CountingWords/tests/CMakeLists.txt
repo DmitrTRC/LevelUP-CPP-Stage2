@@ -16,6 +16,7 @@ add_executable(Words_Tests_run
                src/hashMap_test.cpp
                src/counter_hash_map_test.cpp
                src/counter_bst_test.cpp
+               src/counter_base_test.cpp
                )
 
 target_link_libraries(Words_Tests_run
