@@ -18,11 +18,13 @@ add_executable(Words_Tests_run
                src/counter_bst_test.cpp
                src/counter_base_test.cpp
                src/counter_test.cpp
+               src/time_measure_test.cpp
                )
 
 target_link_libraries(Words_Tests_run
                       gtest_main
                       cw_string::lib
+                      tm::lib
                       )
 
 include(GoogleTest)
