@@ -3,14 +3,16 @@
 //
 
 #include "Counter_Base.hpp"
-#include "Counter.hpp"
 #include "Counter_Bst.hpp"
 #include "Counter_Hash_Map.hpp"
 #include "Helper.hpp"
+#include "Counter.hpp"
+#include "T_Measure.hpp"
 
 #include <algorithm>
 #include <chrono>
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <locale>
 
@@ -80,7 +82,14 @@ int main(int argc, char *argv[]) {
 
 
 #ifdef MEASURE_TIME
-    counter->load_me();
+
+    std::wcout << "Loading data..." << std::endl;
+
+    auto dt = measure_time([&counter]() { counter->load(); });
+
+    std::wcout << "Time to load: " << dt << " micro seconds" << std::endl;
+
+
 #else
     counter->load();
 #endif
@@ -97,8 +106,22 @@ int main(int argc, char *argv[]) {
 
             std::wcout << "Searching for word: " << word_to_search << std::endl << std::endl;
 
+            int frequency{0};
 
+#ifdef MEASURE_TIME
+
+            dt = measure_time([&counter, &word_to_search, &frequency]() {
+
+                frequency = counter->get(word_to_search);
+
+            });
+
+            std::wcout << "Time to search: " << dt << " micro seconds" << std::endl;
+
+#else
             int frequency = counter->get(word_to_search);
+#endif
+
 
             std::wcout << word_to_search << " : " << frequency << " times" << std::endl << std::endl;
 

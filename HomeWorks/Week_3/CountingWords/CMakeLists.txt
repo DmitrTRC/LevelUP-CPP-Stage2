@@ -26,9 +26,19 @@ add_library(Words_Lib SHARED
             src/Counter_Bst.cpp
             )
 
+add_library(t_measure_lib SHARED
+            src/T_Measure.cpp
+            )
+
 add_library(cw_string::lib ALIAS Words_Lib)
+add_library(tm::lib ALIAS t_measure_lib)
 
 target_include_directories(Words_Lib
+                           PUBLIC
+                           ${PROJECT_SOURCE_DIR}/include
+                           )
+
+target_include_directories(t_measure_lib
                            PUBLIC
                            ${PROJECT_SOURCE_DIR}/include
                            )
@@ -45,6 +55,7 @@ add_executable(Words src/main.cpp)
 
 target_link_libraries(Words PRIVATE
                       cw_string::lib
+                      tm::lib
                       )
 
 # Tests
