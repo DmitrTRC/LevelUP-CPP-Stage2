@@ -63,6 +63,7 @@ public:
 
     wString &operator+=(wString &);
 
+
     wString &operator+(const wchar_t *);
 
     template<typename T, typename Y>

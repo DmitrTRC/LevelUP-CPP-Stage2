@@ -257,3 +257,4 @@ bool wString::operator==(const wchar_t *rhs) const {
 }
 
 
+
