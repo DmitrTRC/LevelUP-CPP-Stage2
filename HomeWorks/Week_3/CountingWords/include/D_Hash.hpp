@@ -28,9 +28,9 @@ private:
 
     constexpr static int default_size = 8;
     constexpr static double rehash_factor = 0.75;
-    int table_size_;
-    int buffer_size_;
-    int size_of_non_empty_cells_;
+    int table_size_; // Actual size of table
+    int buffer_size_; // Size of buffer (Memory allocated for table)
+    int size_of_non_empty_cells_; // Number of non-empty cells in table
 
     struct Node {
         T value_;
@@ -121,7 +121,7 @@ void DHash<T>::Insert(const T &value) {
 
 
 template<class T>
-DHash<T>::DHash() : table_size_(default_size), buffer_size_(default_size), size_of_non_empty_cells_(0) {
+DHash<T>::DHash() : table_size_(0), buffer_size_(default_size), size_of_non_empty_cells_(0) {
 
     table_ = new Node *[table_size_];
 
@@ -196,7 +196,7 @@ void DHash<T>::rehash() {
 
     for (int i = 0; i < buffer_size_; ++i) {
         if (new_table[i] && new_table[i]->state)
-            Add(new_table[i]->value);
+            Insert(new_table[i]->value);
     }
 
     for (int i = 0; i < buffer_size_; ++i) {
