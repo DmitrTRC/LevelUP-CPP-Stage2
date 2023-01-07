@@ -20,9 +20,9 @@ public:
 
     ~DHash();
 
-    void Insert(const T &);
+    void Insert(T &);
 
-    int Get(const T &) const;
+    int Get(T &) const;
 
 private:
 
@@ -55,12 +55,12 @@ private:
 };
 
 template<class T>
-int DHash<T>::Get(const T &value) const {
+int DHash<T>::Get(T &value) const {
 
-    int hash1 = hashFunc_1(value);
-    int hash2 = hashFunc_2(value);
+    int hash1{hashFunc_1(value)};
+    int hash2{hashFunc_2(value)};
 
-    int i = 0;
+    int i{0};
 
     while (table_[hash1] != nullptr && i < buffer_size_) {
 
@@ -77,7 +77,7 @@ int DHash<T>::Get(const T &value) const {
 }
 
 template<class T>
-void DHash<T>::Insert(const T &value) {
+void DHash<T>::Insert(T &value) {
 
     if (table_size_ + 1 > rehash_factor * buffer_size_) {
         resize();
@@ -88,8 +88,8 @@ void DHash<T>::Insert(const T &value) {
     int hash1 = hashFunc_1(value);
     int hash2 = hashFunc_2(value);
 
-    int i = 0;
-    int first_deleted = -1;
+    int i{0};
+    int first_deleted{-1};
 
     while (table_[hash1] != nullptr && i < buffer_size_) {
 
@@ -133,7 +133,7 @@ DHash<T>::DHash() : table_size_(0), buffer_size_(default_size), size_of_non_empt
 template<class T>
 DHash<T>::~DHash() {
 
-    for_each(table_, table_ + table_size_, [](Node *node) {
+    std::for_each(table_, table_ + table_size_, [](Node *node) {
         delete node;
     });
 
@@ -145,6 +145,29 @@ DHash<T>::~DHash() {
 template<class T>
 void DHash<T>::resize() {
 
+    int last_buffer_size = buffer_size_;
+
+    buffer_size_ *= 2;
+    size_of_non_empty_cells_ = 0;
+    table_size_ = 0;
+
+    Node **new_table = new Node *[buffer_size_];
+
+    std::fill(new_table, new_table + buffer_size_, nullptr);
+
+    std::swap(table_, new_table);
+
+    std::for_each(new_table, new_table + last_buffer_size, [this](Node *node) {
+        if (node != nullptr && node->state_) {
+            Insert(node->value_);
+        }
+    });
+
+    std::for_each(new_table, new_table + last_buffer_size, [](Node *node) {
+        delete node;
+    });
+
+    delete[] new_table;
 
 }
 
@@ -169,7 +192,7 @@ int DHash<T>::dHashFunction(const T &obj, const int key) const {
 
     int hash_result = 0;
 
-    for_each(obj.begin(), obj.end(), [&hash_result, &key, this](const auto &i) {
+    std::for_each(obj.begin(), obj.end(), [&hash_result, &key, this](const auto &i) {
 
         hash_result = (key * hash_result + i) % table_size_;
 
@@ -188,23 +211,20 @@ void DHash<T>::rehash() {
 
     Node **new_table = new Node *[buffer_size_];
 
-    for (int i = 0; i < buffer_size_; ++i) {
-        new_table[i] = nullptr;
-    }
+    std::fill(new_table, new_table + buffer_size_, nullptr);
 
     std::swap(table_, new_table);
 
-    for (int i = 0; i < buffer_size_; ++i) {
-        if (new_table[i] && new_table[i]->state)
-            Insert(new_table[i]->value);
-    }
-
-    for (int i = 0; i < buffer_size_; ++i) {
-
-        if (new_table[i]) {
-            delete new_table[i];
+    std::for_each(new_table, new_table + buffer_size_, [this](Node *node) {
+        if (node && node->state_) {
+            Insert(node->value_);
         }
-    }
+    });
+
+
+    std::for_each(new_table, new_table + buffer_size_, [](Node *node) {
+        delete node;
+    });
 
     delete[] new_table;
 

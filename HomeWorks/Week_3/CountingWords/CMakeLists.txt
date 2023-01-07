@@ -25,6 +25,7 @@ add_library(Words_Lib SHARED
             src/Counter_Hash_Map.cpp
             src/Counter_Bst.cpp
             src/D_Hash.cpp
+            src/Counter_Dhash.cpp
             )
 
 add_library(t_measure_lib SHARED
