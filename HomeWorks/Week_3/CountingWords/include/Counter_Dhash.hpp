@@ -22,7 +22,7 @@ public:
 
 private:
 
-    DHash<wString> map_;
+    DHash map_;
 
     void adder(wString &) override;
 };

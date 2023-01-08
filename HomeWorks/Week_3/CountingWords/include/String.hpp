@@ -53,12 +53,10 @@ public:
 
     [[nodiscard]] inline bool empty() const { return length_ == 0; }
 
-    template<typename T>
-    wString &operator=(T &&str);
 
-    wString &operator=(const wString &str);
+    wString &operator=(const wString &);
 
-    wString &operator=(const wchar_t *str);
+    wString &operator=(const wchar_t *);
 
 
     wString &operator+=(wString &);

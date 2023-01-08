@@ -44,24 +44,6 @@ const wchar_t *wString::wc_str() {
     return str_;
 }
 
-template<typename T>
-wString &wString::operator=(T &&str) {
-
-    if (this == &str) {
-
-        return *this;
-    }
-
-    delete[] str_;
-
-    length_ = str.length();
-
-    str_ = new wchar_t[length_ + 1];
-
-    std::wcscpy(str_, str.wc_str());
-
-    return *this;
-}
 
 
 wchar_t &wString::operator[](size_t index) {
@@ -255,6 +237,7 @@ bool wString::operator==(const wchar_t *rhs) const {
     return wcscmp(str_, rhs) == 0;
 
 }
+
 
 
 

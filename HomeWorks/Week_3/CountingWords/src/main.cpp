@@ -4,12 +4,12 @@
 
 #include "Counter_Base.hpp"
 #include "Counter_Bst.hpp"
+#include "Counter_Dhash.hpp"
 #include "Counter_Hash_Map.hpp"
 #include "Helper.hpp"
 #include "Counter.hpp"
 #include "T_Measure.hpp"
 
-#include <algorithm>
 #include <chrono>
 #include <fstream>
 #include <functional>
@@ -72,6 +72,13 @@ int main(int argc, char *argv[]) {
         std::wcout << "Using BinarySearchTree" << std::endl;
         counter = new CounterBST(data);
         --argc;
+
+    } else if (strcmp(method, "-dhash") == 0) {
+
+        std::wcout << "Using DoubleHashMap" << std::endl;
+        counter = new Counter_dhash(data);
+        --argc;
+
 
     } else { // use std::unordered_map
 
