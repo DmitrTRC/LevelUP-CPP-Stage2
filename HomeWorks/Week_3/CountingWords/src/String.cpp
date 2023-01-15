@@ -30,8 +30,8 @@ wString::wString() : length_(0) {
 
 [[maybe_unused]] wString::wString(wString &&str) noexcept: length_(str.length_), str_(str.str_) {
 
-    str.length_ = 0;
     str.str_ = nullptr;
+    str.length_ = 0;
 }
 
 wString::~wString() {

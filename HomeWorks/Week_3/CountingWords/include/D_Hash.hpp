@@ -39,10 +39,10 @@ private:
         bool state_;
 
         explicit Node(wString value) : value_(std::move(value)), count_{1}, state_(true) {} // Check the count!
+        Node(wString value, int count) : value_(std::move(value)), count_(count), state_(true) {}
     };
 
     Node **table_;
-
 
 
     void resize();

@@ -53,6 +53,7 @@ void DHash::Insert(wString &value, int count) {
 
         if (table_[hash1]->value_ == value && table_[hash1]->state_) {
             table_[hash1]->count_ += count;
+//            table_[hash1]->count_ = count;
             return;
         }
 
@@ -65,12 +66,13 @@ void DHash::Insert(wString &value, int count) {
     }
 
     if (first_deleted == -1) {
-        table_[hash1] = new Node(value);
+        //table_[hash1] = new Node(value);
+        table_[hash1] = new Node(value, count);
         ++size_of_non_empty_cells_;
 
     } else {
         table_[first_deleted]->value_ = value;
-        //       table_[first_deleted]->count_ = 1;
+        table_[first_deleted]->count_ = 1;
         table_[first_deleted]->state_ = true;
     }
 
@@ -100,29 +102,45 @@ DHash::~DHash() {
 
 void DHash::resize() {
 
-    int last_buffer_size = buffer_size_;
-
+    int past_buffer_size = buffer_size_;
     buffer_size_ *= 2;
     size_of_non_empty_cells_ = 0;
     r_size_ = 0;
-
-    Node **new_table = new Node *[buffer_size_];
-
-    std::fill(new_table, new_table + buffer_size_, nullptr);
-
-    std::swap(table_, new_table);
-
-    std::for_each(new_table, new_table + last_buffer_size, [this](Node *node) {
-        if (node != nullptr && node->state_) {
-            Insert(node->value_, node->count_);
-        }
-    });
-
-    std::for_each(new_table, new_table + last_buffer_size, [](Node *node) {
-        delete node;
-    });
-
-    delete[] new_table;
+    Node **arr2 = new Node *[buffer_size_];
+    for (int i = 0; i < buffer_size_; ++i)
+        arr2[i] = nullptr;
+    std::swap(table_, arr2);
+    for (int i = 0; i < past_buffer_size; ++i) {
+        if (arr2[i] && arr2[i]->state_)
+            Insert(arr2[i]->value_);
+    }
+    for (int i = 0; i < past_buffer_size; ++i)
+        if (arr2[i])
+            delete arr2[i];
+    delete[] arr2;
+//    int last_buffer_size = buffer_size_;
+//
+//    buffer_size_ *= 2;
+//    size_of_non_empty_cells_ = 0;
+//    r_size_ = 0;
+//
+//    Node **new_table = new Node *[buffer_size_];
+//
+//    std::fill(new_table, new_table + buffer_size_, nullptr);
+//
+//    std::swap(table_, new_table);
+//
+//    std::for_each(new_table, new_table + last_buffer_size, [this](Node *node) {
+//        if (node != nullptr && node->state_) {
+//            Insert(node->value_, node->count_);
+//        }
+//    });
+//
+//    std::for_each(new_table, new_table + last_buffer_size, [](Node *node) {
+//        delete node;
+//    });
+//
+//    delete[] new_table;
 
 }
 
@@ -133,24 +151,38 @@ void DHash::rehash() {
 
     size_of_non_empty_cells_ = 0;
     r_size_ = 0;
-
-    Node **new_table = new Node *[buffer_size_];
-
-    std::fill(new_table, new_table + buffer_size_, nullptr);
-
-    std::swap(table_, new_table);
-
-    std::for_each(new_table, new_table + buffer_size_, [this](Node *node) {
-        if (node && node->state_) {
-            Insert(node->value_, node->count_); // ???
-        }
-    });
-
-
-    std::for_each(new_table, new_table + buffer_size_, [](Node *node) {
-        delete node;
-    });
-
-    delete[] new_table;
+    Node **arr2 = new Node *[buffer_size_];
+    for (int i = 0; i < buffer_size_; ++i)
+        arr2[i] = nullptr;
+    std::swap(table_, arr2);
+    for (int i = 0; i < buffer_size_; ++i) {
+        if (arr2[i] && arr2[i]->state_)
+            Insert(arr2[i]->value_);
+    }
+    for (int i = 0; i < buffer_size_; ++i)
+        if (arr2[i])
+            delete arr2[i];
+    delete[] arr2;
+//    size_of_non_empty_cells_ = 0;
+//    r_size_ = 0;
+//
+//    Node **new_table = new Node *[buffer_size_];
+//
+//    std::fill(new_table, new_table + buffer_size_, nullptr);
+//
+//    std::swap(table_, new_table);
+//
+//    std::for_each(new_table, new_table + buffer_size_, [this](Node *node) {
+//        if (node && node->state_) {
+//            Insert(node->value_, node->count_); // ???
+//        }
+//    });
+//
+//
+//    std::for_each(new_table, new_table + buffer_size_, [](Node *node) {
+//        delete node;
+//    });
+//
+//    delete[] new_table;
 
 }
