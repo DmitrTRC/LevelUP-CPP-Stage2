@@ -41,8 +41,7 @@ private:
 
         Node(wString value, int count) : value_(std::move(value)), count_(count) {}
 
-        //Copy constructor
-        Node(const Node &other) : value_(other.value_), count_(other.count_) {}
+        Node(const Node &other) = default;
     };
 
     Node **table_;

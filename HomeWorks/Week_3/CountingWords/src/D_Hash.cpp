@@ -37,12 +37,13 @@ int DHash::Get(wString &value) const {
 
 void DHash::Insert(wString &value, int count) {
 
-    if (r_size_ + 1 > int(rehash_factor * buffer_size_)) { //FIXME: cast to int is necessary
+    if (r_size_ + 1 > static_cast<int>(rehash_factor * buffer_size_)) {
         resize();
     }
 
     auto hf1 = hashFunc_1();
     auto hf2 = hashFunc_2();
+
     int hash1 = hf1(value, buffer_size_);
     int hash2 = hf2(value, buffer_size_);
 
@@ -52,6 +53,7 @@ void DHash::Insert(wString &value, int count) {
 
         if (table_[hash1]->value_ == value) {
             table_[hash1]->count_ += count;
+
             return;
         }
 
