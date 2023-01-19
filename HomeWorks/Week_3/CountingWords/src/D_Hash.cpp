@@ -46,24 +46,22 @@ void DHash::Insert(wString &value, int count) {
     int hash1 = hf1(value, buffer_size_);
     int hash2 = hf2(value, buffer_size_);
 
-    int i = 0;
-
+    int i{0};
 
     while (table_[hash1] != nullptr && i < buffer_size_) {
 
         if (table_[hash1]->value_ == value) {
             table_[hash1]->count_ += count;
-//            table_[hash1]->count_ = count;
             return;
         }
-
 
         hash1 = (hash1 + hash2) % buffer_size_;
         i++;
     }
 
-
+    table_[hash1] = new Node(value, count);
     ++r_size_;
+
 }
 
 
@@ -89,11 +87,8 @@ DHash::~DHash() {
 
 void DHash::resize() {
 
-    std::cerr << "Resize started" << std::endl;
-
     int past_buffer_size = buffer_size_;
     buffer_size_ *= 2;
-
     r_size_ = 0;
 
     Node **arr2 = new Node *[buffer_size_];
@@ -106,15 +101,13 @@ void DHash::resize() {
 
     for (int i = 0; i < past_buffer_size; ++i) {
         if (arr2[i])
-            Insert(arr2[i]->value_);
+            Insert(arr2[i]->value_, arr2[i]->count_);
     }
 
     for (int i = 0; i < past_buffer_size; ++i)
         if (arr2[i])
             delete arr2[i];
     delete[] arr2;
-
-    std::cerr << "Resize finished" << std::endl;
 
 }
 

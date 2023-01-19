@@ -17,7 +17,7 @@ TEST(TMeasure, Measure_Time) {
         return fibonacci(n - 1) + fibonacci(n - 2);
     };
 
-    auto dt = measure_time(fibonacci, 40);
+    auto dt = measure_time(fibonacci, 30);
 
     EXPECT_GT(dt, 0);
 }
