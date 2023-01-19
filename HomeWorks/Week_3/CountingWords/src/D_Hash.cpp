@@ -102,6 +102,7 @@ DHash::~DHash() {
 
 void DHash::resize() {
 
+    std::cerr << "Resize started" << std::endl;
     int past_buffer_size = buffer_size_;
     buffer_size_ *= 2;
     size_of_non_empty_cells_ = 0;
@@ -118,6 +119,8 @@ void DHash::resize() {
         if (arr2[i])
             delete arr2[i];
     delete[] arr2;
+
+    std::cerr << "Resize finished" << std::endl;
 //    int last_buffer_size = buffer_size_;
 //
 //    buffer_size_ *= 2;
@@ -145,9 +148,9 @@ void DHash::resize() {
 }
 
 
-
-
 void DHash::rehash() {
+
+    std::cerr << "Rehash started" << std::endl;
 
     size_of_non_empty_cells_ = 0;
     r_size_ = 0;
@@ -163,6 +166,8 @@ void DHash::rehash() {
         if (arr2[i])
             delete arr2[i];
     delete[] arr2;
+
+    std::cerr << "Rehash finished" << std::endl;
 //    size_of_non_empty_cells_ = 0;
 //    r_size_ = 0;
 //
