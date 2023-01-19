@@ -31,23 +31,24 @@ private:
 
     int r_size_; // Actual size of table
     int buffer_size_; // Size of buffer (Memory allocated for table)
-    int size_of_non_empty_cells_; // Number of non-empty cells in table
+
 
     struct Node {
         wString value_;
         int count_;
-        bool state_;
 
-        explicit Node(wString value) : value_(std::move(value)), count_{1}, state_(true) {} // Check the count!
-        Node(wString value, int count) : value_(std::move(value)), count_(count), state_(true) {}
+        explicit Node(wString value) : value_(std::move(value)), count_{1} {} // Check the count!
+
+        Node(wString value, int count) : value_(std::move(value)), count_(count) {}
+
+        //Copy constructor
+        Node(const Node &other) : value_(other.value_), count_(other.count_) {}
     };
 
     Node **table_;
 
 
     void resize();
-
-    void rehash();
 
 };
 
