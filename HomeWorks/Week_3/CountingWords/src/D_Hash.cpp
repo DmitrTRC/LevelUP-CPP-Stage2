@@ -101,17 +101,16 @@ void DHash::resize() {
 
     std::swap(table_, arr2);
 
-    for (int i = 0; i < past_buffer_size; ++i) {
-        if (arr2[i])
-            Insert(arr2[i]->value_, arr2[i]->count_);
-    }
 
-    for (int i = 0; i < past_buffer_size; ++i)
-        if (arr2[i])
-            delete arr2[i];
+    std::for_each(arr2, arr2 + past_buffer_size, [this](Node *node) {
+        if (node) {
+            Insert(node->value_, node->count_);
+            delete node;
+        }
+    });
+
     delete[] arr2;
 
 }
-
 
 #pragma clang diagnostic pop
